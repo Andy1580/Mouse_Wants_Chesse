@@ -7,24 +7,37 @@ public class RatShoot : MonoBehaviour
 
     public bool ballIsAdded;
 
-    Rigidbody rb;
-
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
+
     }
 
     private void Update()
     {
+        Shoot();
 
-        Transform ball = Instantiate(ballTramp, ponitSpawn.position, ponitSpawn.rotation);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    void Shoot()
     {
-        if (!ballIsAdded && Input.GetKeyDown(KeyCode.Space))
+        if (ballIsAdded == true && Input.GetKeyDown(KeyCode.Space))
         {
-            ballIsAdded = true;
+            Instantiate(ballTramp, ponitSpawn.position, ponitSpawn.rotation);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.gameObject.tag == "BallTramp")
+        {
+            Debug.Log("Entro");
+            if (Input.GetKeyDown(KeyCode.Space) && ballIsAdded == false)
+            {
+                Debug.Log("Se destruyo");
+                ballIsAdded = true;
+                Destroy(this.gameObject);
+            }
         }
     }
 
