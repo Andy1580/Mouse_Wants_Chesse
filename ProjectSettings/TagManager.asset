@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Tramp
   - BallTramp
+  - Ball
   layers:
   - Default
   - TransparentFX
