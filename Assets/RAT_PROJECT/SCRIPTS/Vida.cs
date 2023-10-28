@@ -11,6 +11,11 @@ public class Vida : MonoBehaviour
     protected Animator animator;
     #endregion Componentes
     #region Core
+    private void Start()
+    {
+        _velocidadActual =_velocidadMovimiento;
+    }
+
     protected void Awake()
     {
         animator = transform.GetChild(0).GetComponent<Animator>();
@@ -24,6 +29,7 @@ public class Vida : MonoBehaviour
     //[SerializeField] private int _vida;
     private int vidaMax;
     [SerializeField] private float _velocidadMovimiento;
+    [SerializeField] private float _velocidadActual;
     [SerializeField] private float _velocidadSigilo;
     [SerializeField] private float _velocidadCorrer;
 
