@@ -14,7 +14,7 @@ public class SlotItem : MonoBehaviour
 
     public void Seleccionar()
     {
-        Inventario.SlotSeleccionado = this;
+        InventarioRaton.SlotSeleccionado = this;
     }
     public ItemSo ItemSo
     {

@@ -1,25 +1,24 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InventarioRaton : MonoBehaviour
+public class Inventarioraton : MonoBehaviour
 {
     #region CORE
-    private static InventarioRaton self;
+    private static Inventarioraton self;
     private Canvas canvas;
     private void Awake()
     {
         self = this;
         canvas = GetComponent<Canvas>();
         Awake_Slots();
-        SlotSeleccionado = null;
+        //SlotSeleccionado = null;
 
     }
 
-private void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.I))
             canvas.enabled = !canvas.enabled;
@@ -41,7 +40,7 @@ private void Update()
         set
         {
             _slotSelecionado = value;
-    
+
             bool hayItem = false;
 
             if (value)
@@ -51,7 +50,7 @@ private void Update()
             if (hayItem)
             {
                 self.icono.enabled = true;
-                self.icono.sprite =  value.ItemSo.Icono;
+                self.icono.sprite = value.ItemSo.Icono;
                 self.nombre.text = value.ItemSo.Nombre;
                 self.descripcion.text = value.ItemSo.descripcion;
                 self.botonUsar.interactable = value.ItemSo.itemGo.Usable;
@@ -60,10 +59,10 @@ private void Update()
             else
             {
                 self.icono.enabled = false;
-                    self.nombre.text = string.Empty;
-                    self.descripcion.text= string.Empty;
-                    self.botonSoltar.interactable  = false;
-                    self.botonUsar.interactable = false;
+                self.nombre.text = string.Empty;
+                self.descripcion.text = string.Empty;
+                self.botonSoltar.interactable = false;
+                self.botonUsar.interactable = false;
 
             }
         }
@@ -86,7 +85,7 @@ private void Update()
             SlotSeleccionado.ItemSo = null;
             SlotSeleccionado = null;
         }
-        
+
     }
     #endregion
     #region Slots
@@ -106,7 +105,7 @@ private void Update()
     private void Awake_Slots()
     {
         slots = PanelSlots.GetComponentsInChildren<SlotItem>();
-        slotsDisponibles= slots.Length; 
+        slotsDisponibles = slots.Length;
     }
 
     public static void Agregarltem(ItemSo itemSo)

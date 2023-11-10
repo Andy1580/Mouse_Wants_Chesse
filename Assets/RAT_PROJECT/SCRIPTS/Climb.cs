@@ -20,11 +20,11 @@ public class Climb: MonoBehaviour
 
     public float groundDrag;
 
-    [Header("Jumping")]
-    public float jumpForce;
-    public float jumpCooldown;
-    public float airMultiplier;
-    bool readyToJump;
+    //[Header("Jumping")]
+    //public float jumpForce;
+    //public float jumpCooldown;
+    //public float airMultiplier;
+    //bool readyToJump;
 
     [Header("Crouching")]
     public float crouchSpeed;
@@ -77,8 +77,8 @@ public class Climb: MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
-
-        readyToJump = true;
+        //jump
+        //readyToJump = true;
 
         startYScale = transform.localScale.y;
     }
@@ -110,14 +110,14 @@ public class Climb: MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         // when to jump
-        if (Input.GetKey(jumpKey) && readyToJump && grounded)
-        {
-            readyToJump = false;
+        //if (Input.GetKey(jumpKey) && readyToJump && grounded)
+        //{
+        //    readyToJump = false;
 
-            Jump();
+        //    Jump();
 
-            Invoke(nameof(ResetJump), jumpCooldown);
-        }
+        //    Invoke(nameof(ResetJump), jumpCooldown);
+        //}
 
         // start crouch
         if (Input.GetKeyDown(crouchKey))
@@ -188,8 +188,8 @@ public class Climb: MonoBehaviour
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
         // in air
-        else if (!grounded)
-            rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        //else if (!grounded)
+        //    rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
 
         // turn gravity off while on slope
         rb.useGravity = !OnSlope();
@@ -218,21 +218,21 @@ public class Climb: MonoBehaviour
         }
     }
 
-    private void Jump()
-    {
-        exitingSlope = true;
+    //private void Jump()
+    //{
+    //    exitingSlope = true;
 
-        // reset y velocity
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+    //    // reset y velocity
+    //    rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-    }
-    private void ResetJump()
-    {
-        readyToJump = true;
+    //    rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+    //}
+    //private void ResetJump()
+    //{
+    //    readyToJump = true;
 
-        exitingSlope = false;
-    }
+    //    exitingSlope = false;
+    //}
 
     private bool OnSlope()
     {

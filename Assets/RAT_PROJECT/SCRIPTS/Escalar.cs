@@ -9,8 +9,7 @@ public class Escalar : MonoBehaviour
     public Rigidbody rb;
     public Climb pm;
     public LayerMask whatIsWall;
-    public Transform raton;
-    public Transform camara;
+    //public Transform raton;
     
 
     [Header("Climbing")]
@@ -60,8 +59,8 @@ public class Escalar : MonoBehaviour
         if (wallFront && Input.GetKey(KeyCode.W) && wallLookAngle < maxWallLookAngle && !exitingWall)
         {
             if (!climbing && climbTimer > 0) StartClimbing();
-            raton.rotation = Quaternion.Euler(-90f, 0, 0);
-            camara.rotation = Quaternion.Euler(-90f, 0, 0);
+            //raton.rotation = Quaternion.Euler(-90f, 0, 0);
+            //camara.rotation = Quaternion.Euler(-90f, 0, 0);
 
             // timer
             if (climbTimer > 0) climbTimer -= Time.deltaTime;
@@ -127,8 +126,8 @@ public class Escalar : MonoBehaviour
     {
         climbing = false;
         pm.climbing = false;
-        raton.rotation = Quaternion.Euler(0, 0, 0);
-        camara.rotation = Quaternion.Euler(-90f, 0, 0);
+        //raton.rotation = Quaternion.Euler(0, 0, 0);
+        //camara.rotation = Quaternion.Euler(-90f, 0, 0);
         /// idea - particle effect
         /// idea - sound effect
     }

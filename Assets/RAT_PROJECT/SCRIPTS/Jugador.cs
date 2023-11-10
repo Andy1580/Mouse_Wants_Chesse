@@ -76,10 +76,10 @@ public class Jugador : Vida
     {
         if (other.gameObject.layer == 7)
         {
-            if (Inventario.HayEspacios)
+            if (InventarioRaton.HayEspacios)
             {
                 Item item = other.GetComponent<Item>();
-                Inventario.Agregarltem(item.ItemSo);
+                InventarioRaton.Agregarltem(item.ItemSo);
                 _quesos++;
                 contador.text = _quesos.ToString();
                 Destroy(other.gameObject);
