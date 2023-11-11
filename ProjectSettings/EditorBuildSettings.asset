@@ -4,5 +4,18 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/RAT_PROJECT/SCENES/INICIO.unity
+    guid: eeb0b175d98750543945e0c24c854dd9
+  - enabled: 1
+    path: Assets/RAT_PROJECT/SCENES/LEVEL1.unity
+    guid: fe9afe941e4ba844c90c3f545fcfbf3a
+  - enabled: 1
+    path: Assets/RAT_PROJECT/SCENES/LEVEL2.unity
+    guid: 82f397112cc77b548868527d556eac99
+  - enabled: 1
+    path: Assets/RAT_PROJECT/SCENES/CREDITS.unity
+    guid: 153ff57763ab6e745b68599ac777af13
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0
