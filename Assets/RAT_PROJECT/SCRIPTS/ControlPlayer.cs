@@ -68,7 +68,6 @@ public class ControlPlayer : MonoBehaviour
     public GameObject item;
     public float fuerza;
 
-    [SerializeField] public Transform start;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -117,7 +116,6 @@ public class ControlPlayer : MonoBehaviour
 
     private void Start()
     {
-        GetComponent<Transform>().position = start.position;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         estamina = MaxStamina;

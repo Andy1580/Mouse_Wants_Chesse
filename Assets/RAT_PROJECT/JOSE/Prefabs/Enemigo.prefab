@@ -812,7 +812,7 @@ MonoBehaviour:
   MaxDist: 29.4
   capPlayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   alerta: 1
 --- !u!114 &8752451199052855279
 MonoBehaviour:
@@ -835,14 +835,20 @@ MonoBehaviour:
   meshFilter: {fileID: 5078476990911097268}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   obstaculo:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 0
   Player: {fileID: 0}
   MoveSpeed: 3
   Cat: {fileID: 6482251457892099187}
   agent: {fileID: 4167500252455895818}
+  Bola: {fileID: 0}
+  MaxDist: 0
+  capBola:
+    serializedVersion: 2
+    m_Bits: 0
+  distraction: 0
 --- !u!195 &4167500252455895818
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -915,7 +921,7 @@ Rigidbody:
   m_CollisionDetection: 0
 --- !u!95 &2725087514335280189
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -929,6 +935,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1

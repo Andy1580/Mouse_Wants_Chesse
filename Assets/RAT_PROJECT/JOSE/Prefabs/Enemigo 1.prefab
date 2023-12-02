@@ -461,7 +461,7 @@ MonoBehaviour:
   MaxDist: 29.4
   capPlayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   alerta: 1
 --- !u!114 &5418426383541872689
 MonoBehaviour:
@@ -484,10 +484,10 @@ MonoBehaviour:
   meshFilter: {fileID: 7211545311362093354}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 0
   obstaculo:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 0
   Player: {fileID: 0}
   MoveSpeed: 3
   Cat: {fileID: 2020289698308416200}
@@ -496,7 +496,7 @@ MonoBehaviour:
   MaxDist: 15.89
   capBola:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 0
   distraction: 0
 --- !u!195 &7407578095862254638
 NavMeshAgent:
