@@ -7,14 +7,15 @@ TagManager:
   - Tramp
   - BallTramp
   - Ball
+  - enemigo
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
+  - whatisWall
   - 
   - 
   - 
