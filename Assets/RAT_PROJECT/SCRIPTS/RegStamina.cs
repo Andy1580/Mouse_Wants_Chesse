@@ -12,11 +12,11 @@ public class RegStamina : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         
-        if (Input.GetKey(KeyCode.Q))
-        {
+        //if (Input.GetKey(KeyCode.Q))
+        //{
 
-            other.GetComponent<Jugador>().Estamina();
-        }
+            other.GetComponent<ControlPlayer>().Estamina();
+        //}
         
     }
 

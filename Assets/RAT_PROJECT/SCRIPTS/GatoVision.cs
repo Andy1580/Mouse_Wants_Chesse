@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class GatoVision : MonoBehaviour
 {
     public int raysToCast;
@@ -26,8 +28,18 @@ public class GatoVision : MonoBehaviour
     public LayerMask obstaculo;
     public Transform Player;
     public float MoveSpeed = 4;
+    public Transform Cat;
 
+    public NavMeshAgent agent;// por donde se movera el gato
 
+    public Transform Bola;  //Asignar el personaje al que seguirán
+    public float MaxDist; //Establecer distancia en la que puede escuchar al personaje
+    public LayerMask capBola; // Layer que verificara
+    public bool distraction; // si/no de que escucho al personaje
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+    }
 
     // Use this for initialization
     void Start()
@@ -48,6 +60,14 @@ public class GatoVision : MonoBehaviour
     void Update()
     {
         RaySweep();
+
+        distraction = Physics.CheckSphere(transform.position, MaxDist, capBola);
+        if (distraction == true)
+        {
+            Vector3 posBola = new Vector3(Bola.position.x, Bola.position.y, Bola.position.z);
+            transform.LookAt(posBola);
+            transform.position = Vector3.MoveTowards(transform.position, posBola, MoveSpeed * Time.deltaTime);
+        }
     }
 
     void RaySweep()
@@ -68,24 +88,25 @@ public class GatoVision : MonoBehaviour
 
             dir = new Vector3(sinX, 0, cosX);
 
-            Debug.DrawRay(transform.position, dir, Color.green); // to aid visualization
+            Debug.DrawRay(Cat.transform.position, dir, Color.green); // to aid visualization
 
             if (Physics.Raycast(transform.position, dir, out hit, sightRange, playerLayer))
             {
                 temp = transform.InverseTransformPoint(hit.point);
                 //temp = hit.point;
                 vertices[i] = new Vector3(temp.x, 0.1f, temp.z);
-                Debug.DrawLine(transform.position, hit.point, Color.red); // agregar color
+                Debug.DrawLine(Cat.transform.position, hit.point, Color.red); // agregar color
                 Debug.Log("¡Jugador detectado!");
-                Vector3 posPlayer = new Vector3(Player.position.x, transform.position.y, Player.position.z);
-                transform.position = Vector3.MoveTowards(transform.position, posPlayer, MoveSpeed * Time.deltaTime);
+                agent.SetDestination(Player.transform.position);
+                //Vector3 posPlayer = new Vector3(Player.position.x, transform.position.y, Player.position.z);
+                //transform.position = Vector3.MoveTowards(transform.position, posPlayer, MoveSpeed * Time.deltaTime);
             }
             if (Physics.Raycast(transform.position, dir, out hit, sightRange, obstaculo))
             {
                 temp = transform.InverseTransformPoint(hit.point);
                 //temp = hit.point;
                 vertices[i] = new Vector3(temp.x, 0.1f, temp.z);
-                Debug.DrawLine(transform.position, hit.point, Color.cyan); // agregar color
+                Debug.DrawLine(Cat.transform.position, hit.point, Color.cyan); // agregar color
                 Debug.Log("Muro");
             }
 
@@ -126,9 +147,14 @@ public class GatoVision : MonoBehaviour
 
     } // end RaySweep
 
-    
-    
 
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.black;
+        Gizmos.DrawWireSphere(transform.position, MaxDist);
+        //Gizmos.DrawWireSphere(transform.position, viewDistance);
+    }
 
+    
 }
 

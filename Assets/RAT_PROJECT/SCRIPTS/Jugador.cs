@@ -80,9 +80,13 @@ public class Jugador : Vida
             {
                 Item item = other.GetComponent<Item>();
                 InventarioRaton.Agregarltem(item.ItemSo);
-                _quesos++;
+                if(item.gameObject.CompareTag("Queso"))
+                {
+                    _quesos++;
+                }
                 contador.text = _quesos.ToString();
-                Destroy(other.gameObject);
+                other.gameObject.SetActive(false);
+                //Destroy(other.gameObject);
             }
             
         }
@@ -146,7 +150,6 @@ public class Jugador : Vida
 
         //transform.Translate(lookDirection * movementSpeed * Time.deltaTime, Space.World);
     
-
 }
    
     private void FU_Movimiento()

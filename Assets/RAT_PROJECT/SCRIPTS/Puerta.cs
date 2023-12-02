@@ -19,37 +19,35 @@ public class Puerta : MonoBehaviour
         Puertavida = Puertavidamax;
         PuertaBar.fillAmount = Puertavidamax;
         PuertaBar.gameObject.SetActive(false);
+        PuertaX = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Adiospuerta();
+        if (Input.GetKey(KeyCode.T))
+        {
+            Adiospuerta();
+        }
     }
 
     public void Adiospuerta()
     {
-        if (Input.GetKey(KeyCode.T))
-        {
-            PuertaX = true;
-        }
-
-        
-           if (PuertaX && Puertavida > 0)
-            {
+           if (PuertaX = true && Puertavida > 0)
+           {
+            
                 Puertavida -= Puertacost * Time.deltaTime;
                 if (Puertavida < 0) Puertavida = 0;
                 PuertaBar.fillAmount = Puertavida / Puertavidamax;
-            }
             if (Puertavida <= 0)
                 gameObject.SetActive(false);
-        
+           }
     }
 
     public void OnCollisionEnter(Collision collision)
     {
         PuertaBar.gameObject.SetActive(true);
-        
+        PuertaX = true;
     }
     public void OnCollisionExit(Collision collision)
     {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -77,15 +78,12 @@ public class Inventarioraton : MonoBehaviour
 
     public void SoltarItem()
     {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
             Transform trans = Jugador.Self.transform;
             Vector3 posicion = trans.position + (trans.forward * 2);
+            //SlotSeleccionado.rb.AddForce(Vector3.up * 80f, ForceMode.Force);//agregado 17/11/23
             Instantiate(SlotSeleccionado.ItemSo.itemGo, posicion, Quaternion.identity);
             SlotSeleccionado.ItemSo = null;
             SlotSeleccionado = null;
-        }
-
     }
     #endregion
     #region Slots

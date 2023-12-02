@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.AI;
 
+
 public class Gato : MonoBehaviour
 {
     public Transform Player;  //Asignar el personaje al que seguirán
@@ -13,6 +14,7 @@ public class Gato : MonoBehaviour
 
     ////var idle:AnimationClip; //Animación en estado de reposo
     ////var run:AnimationClip; //Animación de correr o perseguir
+
 
     public void Start()
     {
@@ -26,7 +28,7 @@ public class Gato : MonoBehaviour
 
         if (alerta == true)
         {
-            Vector3 posPlayer = new Vector3(Player.position.x, transform.position.y, Player.position.z);
+            Vector3 posPlayer = new Vector3(Player.position.x, Player.position.y, Player.position.z);
             transform.LookAt(posPlayer);
             //transform.position = Vector3.MoveTowards(transform.position, posPlayer, MoveSpeed * Time.deltaTime);
         }
@@ -60,7 +62,7 @@ public class Gato : MonoBehaviour
 
     }
 
-    private NavMeshAgent agent;
+    
 
     private void OnDrawGizmos()
     {

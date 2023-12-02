@@ -9,4 +9,12 @@ public class ItemSo : ScriptableObject
     public Sprite Icono;
     [TextArea] public string descripcion;
     public Item itemGo;
+    public Rigidbody body;
+
+    //[Header("Ground Check")]
+    //public float ItemHeight;
+    //public LayerMask whatIsGround;
+    //public bool grounded;
+
+
 }

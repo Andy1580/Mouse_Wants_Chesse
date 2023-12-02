@@ -10,6 +10,7 @@ public class InventarioRaton : MonoBehaviour
     #region CORE
     private static InventarioRaton self;
     private Canvas canvas;
+    public ItemSo ItemSo;
     private void Awake()
     {
         self = this;
@@ -78,14 +79,16 @@ private void Update()
 
     public void SoltarItem()
     {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            Transform trans = Jugador.Self.transform;
-            Vector3 posicion = trans.position + (trans.forward * 2);
-            Instantiate(SlotSeleccionado.ItemSo.itemGo, posicion, Quaternion.identity);
-            SlotSeleccionado.ItemSo = null;
-            SlotSeleccionado = null;
-        }
+        //if (Input.GetKeyDown(KeyCode.X))
+        //{
+        Transform trans = Jugador.Self.transform;
+        Vector3 posicion = trans.position + (trans.forward * 2);
+        Vector3 force = trans.up * 2;
+        Instantiate(SlotSeleccionado.ItemSo.itemGo, posicion, Quaternion.identity);
+       
+        SlotSeleccionado.ItemSo = null;
+        SlotSeleccionado = null;
+        //}
         
     }
     #endregion

@@ -71,9 +71,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3331192991113296964}
-  - component: {fileID: 3331192991113296967}
   - component: {fileID: 3331192991113296965}
+  - component: {fileID: 2396780553323269513}
   - component: {fileID: 940022045693167091}
+  - component: {fileID: 3331192991113296967}
   m_Layer: 0
   m_Name: Personaje
   m_TagString: Untagged
@@ -100,33 +101,6 @@ Transform:
   - {fileID: 2975891838116343644}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &3331192991113296967
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3331192991113296963}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 72
-  m_CollisionDetection: 0
 --- !u!114 &3331192991113296965
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +136,45 @@ MonoBehaviour:
   StaminaBar: {fileID: 0}
   IndicadorRun: {fileID: 0}
   IndicadorSig: {fileID: 0}
+--- !u!114 &2396780553323269513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3331192991113296963}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66c51fba80f6c0846b71fb34a6909f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 0
+  sprintSpeed: 0
+  slideSpeed: 0
+  wallrunSpeed: 0
+  climbSpeed: 0
+  airMinSpeed: 0
+  speedIncreaseMultiplier: 0
+  slopeIncreaseMultiplier: 0
+  groundDrag: 0
+  airMultiplier: 0
+  crouchSpeed: 0
+  crouchYScale: 0
+  jumpKey: 32
+  sprintKey: 304
+  crouchKey: 306
+  playerHeight: 0
+  whatIsGround:
+    serializedVersion: 2
+    m_Bits: 0
+  grounded: 0
+  maxSlopeAngle: 0
+  orientation: {fileID: 0}
+  state: 0
+  sliding: 0
+  crouching: 0
+  wallrunning: 0
+  climbing: 0
 --- !u!65 &940022045693167091
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -183,6 +196,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.5284052, y: 0.5048796, z: 0.94279945}
   m_Center: {x: 0.014482245, y: -0.14183325, z: -0.028600276}
+--- !u!54 &3331192991113296967
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3331192991113296963}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 72
+  m_CollisionDetection: 0
 --- !u!1001 &3331192991048077047
 PrefabInstance:
   m_ObjectHideFlags: 0

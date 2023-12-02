@@ -7,7 +7,7 @@ public class Escalar : MonoBehaviour
     [Header("References")]
     public Transform orientation;
     public Rigidbody rb;
-    public Climb pm;
+    public ControlPlayer pm;
     public LayerMask whatIsWall;
     //public Transform raton;
     
