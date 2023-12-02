@@ -67,7 +67,9 @@ public class ControlPlayer : MonoBehaviour
 
     public GameObject item;
     public float fuerza;
+    public Animator animator;
 
+    [SerializeField] public Transform start;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -116,9 +118,10 @@ public class ControlPlayer : MonoBehaviour
 
     private void Start()
     {
-       transform.Rotate(90,0,0);
+        animator = GetComponent<Animator>();
+        GetComponent<Transform>().position = start.position;
         rb = GetComponent<Rigidbody>();
-        //rb.freezeRotation = true;
+        rb.freezeRotation = true;
         estamina = MaxStamina;
         //jump
         //readyToJump = true;
@@ -213,6 +216,7 @@ public class ControlPlayer : MonoBehaviour
         {
             state = MovementState.climbing;
             desiredMoveSpeed = climbSpeed;
+            animator.SetBool("IsCiming", true);
         }
         // Mode - Stealing
         else if (Input.GetKey(stealthKey))
@@ -225,6 +229,7 @@ public class ControlPlayer : MonoBehaviour
                 estamina -= stealcost * Time.deltaTime;
                 if (estamina < 0) estamina = 0;
                 StaminaBar.fillAmount = estamina / MaxStamina;
+                animator.SetBool("IsStealth", true);
             }
 
         }
@@ -241,7 +246,7 @@ public class ControlPlayer : MonoBehaviour
                 estamina -= runcost * Time.deltaTime;
                 if (estamina < 0) estamina = 0;
                 StaminaBar.fillAmount = estamina / MaxStamina;
-
+                animator.SetBool("IsRunning", true);
             }
 
         }
@@ -251,12 +256,14 @@ public class ControlPlayer : MonoBehaviour
         {
             state = MovementState.walking;
             moveSpeed = walkSpeed;
+            animator.SetBool("IsWalking", true);
         }
 
         // Mode - Air
         else
         {
             state = MovementState.air;
+            animator.SetBool("IsWalking", true);
         }
     }
 

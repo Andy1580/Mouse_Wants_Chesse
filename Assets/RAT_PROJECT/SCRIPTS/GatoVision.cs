@@ -36,6 +36,8 @@ public class GatoVision : MonoBehaviour
     public float MaxDist; //Establecer distancia en la que puede escuchar al personaje
     public LayerMask capBola; // Layer que verificara
     public bool distraction; // si/no de que escucho al personaje
+
+    public Animator gatoanimator;
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -53,6 +55,7 @@ public class GatoVision : MonoBehaviour
         visionConeMesh.name = "VisionCone";
         meshFilter = GetComponent<MeshFilter>();
         meshFilter.mesh = visionConeMesh;
+        gatoanimator = GetComponent<Animator>();
 
     }
 
@@ -60,14 +63,15 @@ public class GatoVision : MonoBehaviour
     void Update()
     {
         RaySweep();
-
-        distraction = Physics.CheckSphere(transform.position, MaxDist, capBola);
-        if (distraction == true)
+        if(Physics.Raycast(transform.position, dir, out hit, sightRange, capBola))
         {
-            Vector3 posBola = new Vector3(Bola.position.x, Bola.position.y, Bola.position.z);
-            transform.LookAt(posBola);
-            transform.position = Vector3.MoveTowards(transform.position, posBola, MoveSpeed * Time.deltaTime);
+            distraction = true;
         }
+        if (agent.isOnOffMeshLink)
+        {
+            gatoanimator.SetBool("IsJumping1", true);
+        }
+
     }
 
     void RaySweep()
@@ -90,6 +94,7 @@ public class GatoVision : MonoBehaviour
 
             Debug.DrawRay(Cat.transform.position, dir, Color.green); // to aid visualization
 
+
             if (Physics.Raycast(transform.position, dir, out hit, sightRange, playerLayer))
             {
                 temp = transform.InverseTransformPoint(hit.point);
@@ -98,9 +103,23 @@ public class GatoVision : MonoBehaviour
                 Debug.DrawLine(Cat.transform.position, hit.point, Color.red); // agregar color
                 Debug.Log("¡Jugador detectado!");
                 agent.SetDestination(Player.transform.position);
+                gatoanimator.Play("Run");
+
                 //Vector3 posPlayer = new Vector3(Player.position.x, transform.position.y, Player.position.z);
                 //transform.position = Vector3.MoveTowards(transform.position, posPlayer, MoveSpeed * Time.deltaTime);
+
             }
+
+            if (Physics.Raycast(transform.position, dir, out hit, sightRange, capBola))
+            {
+                temp = transform.InverseTransformPoint(hit.point);
+                //temp = hit.point;
+                vertices[i] = new Vector3(temp.x, 0.1f, temp.z);
+                Debug.DrawLine(Cat.transform.position, hit.point, Color.red);
+                Debug.Log("¡Bola de estambre detectado!");
+                agent.SetDestination(Bola.transform.position);
+            }
+
             if (Physics.Raycast(transform.position, dir, out hit, sightRange, obstaculo))
             {
                 temp = transform.InverseTransformPoint(hit.point);
@@ -115,6 +134,7 @@ public class GatoVision : MonoBehaviour
                 temp = transform.InverseTransformPoint(transform.position + dir);
                 //temp = transform.position + dir;
                 vertices[i] = new Vector3(temp.x, 0.1f, temp.z);
+                gatoanimator.SetBool("Gato idle", true);
             }
 
         } // end raycast loop
