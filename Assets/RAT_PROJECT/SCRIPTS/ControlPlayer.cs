@@ -116,8 +116,9 @@ public class ControlPlayer : MonoBehaviour
 
     private void Start()
     {
+       transform.Rotate(90,0,0);
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        //rb.freezeRotation = true;
         estamina = MaxStamina;
         //jump
         //readyToJump = true;
