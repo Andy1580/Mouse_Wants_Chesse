@@ -23,7 +23,9 @@ public class RumbaFunctions : MonoBehaviour
         {
             if (isAlive == true)
             {
-                Destroy(playerPrefab);
+                //Destroy(playerPrefab);
+                playerPrefab.SetActive(false);
+                Time.timeScale = 0f;
                 gameOverCanvas.SetActive(true);
             }
         }

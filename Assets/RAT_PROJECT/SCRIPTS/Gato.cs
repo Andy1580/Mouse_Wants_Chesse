@@ -15,14 +15,17 @@ public class Gato : MonoBehaviour
     public bool bola; // la bola esta en su rango
     public LayerMask capBola; // Layer que verificara
     public Transform Bola;
-
+    public NavMeshAgent agent;
+    public Animator gatoanimator;
+    
     ////var idle:AnimationClip; //Animación en estado de reposo
     ////var run:AnimationClip; //Animación de correr o perseguir
 
 
     public void Start()
     {
-
+        isAlive = true;
+        col = GetComponent<Collider>();
     }
 
     public void Update()
@@ -34,6 +37,8 @@ public class Gato : MonoBehaviour
         {
             Vector3 posPlayer = new Vector3(Player.position.x, Player.position.y, Player.position.z);
             transform.LookAt(posPlayer);
+            agent.SetDestination(Player.transform.position);
+            gatoanimator.SetBool("IsRunning", true);
             //transform.position = Vector3.MoveTowards(transform.position, posPlayer, MoveSpeed * Time.deltaTime);
         }
 
@@ -82,5 +87,22 @@ public class Gato : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, MaxDist);
         //Gizmos.DrawWireSphere(transform.position, viewDistance);
     }
+    [SerializeField] private bool isAlive;
+    [SerializeField] private GameObject playerPrefab;
+    Collider col;
 
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            if (isAlive == true)
+            {
+                //Destroy(playerPrefab);
+                playerPrefab.SetActive(false);
+                Time.timeScale = 0f;
+                Application.Quit();
+            }
+        }
+    }
 }

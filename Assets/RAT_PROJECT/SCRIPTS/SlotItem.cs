@@ -7,7 +7,6 @@ public class SlotItem : MonoBehaviour
 {
     private ItemSo _itemSo;
     private Image icono;
-    public Rigidbody rb;//agregado 17/11/23
     void Awake()
     {
         icono = transform.GetChild(0).GetComponent<Image>();

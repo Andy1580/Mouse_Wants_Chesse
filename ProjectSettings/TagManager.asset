@@ -9,6 +9,7 @@ TagManager:
   - Ball
   - enemigo
   - Bola
+  - Queso
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Jugador
   - Bola
   - Items
-  - 
+  - Obstaculo
   - 
   - 
   - 

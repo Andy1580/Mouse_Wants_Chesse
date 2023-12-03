@@ -46,6 +46,7 @@ public class GatoVision : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        isAlive = true;
         vertices = new Vector3[raysToCast + 1];
         uvs = new Vector2[vertices.Length];
         triangles = new int[(vertices.Length * 3) - 9];
@@ -63,13 +64,17 @@ public class GatoVision : MonoBehaviour
     void Update()
     {
         RaySweep();
-        if(Physics.Raycast(transform.position, dir, out hit, sightRange, capBola))
+        if (Physics.Raycast(transform.position, dir, out hit, sightRange, capBola))
         {
             distraction = true;
         }
         if (agent.isOnOffMeshLink)
         {
-            gatoanimator.SetBool("IsJumping1", true);
+            gatoanimator.SetBool("IsJumping2", true);
+        }
+        else
+        {
+            gatoanimator.SetBool("IsJumping2", false);
         }
 
     }
@@ -103,12 +108,13 @@ public class GatoVision : MonoBehaviour
                 Debug.DrawLine(Cat.transform.position, hit.point, Color.red); // agregar color
                 Debug.Log("¡Jugador detectado!");
                 agent.SetDestination(Player.transform.position);
-                gatoanimator.Play("Run");
+                gatoanimator.SetBool("IsRunning", true);
 
                 //Vector3 posPlayer = new Vector3(Player.position.x, transform.position.y, Player.position.z);
                 //transform.position = Vector3.MoveTowards(transform.position, posPlayer, MoveSpeed * Time.deltaTime);
 
             }
+
 
             if (Physics.Raycast(transform.position, dir, out hit, sightRange, capBola))
             {
@@ -119,6 +125,7 @@ public class GatoVision : MonoBehaviour
                 Debug.Log("¡Bola de estambre detectado!");
                 agent.SetDestination(Bola.transform.position);
             }
+
 
             if (Physics.Raycast(transform.position, dir, out hit, sightRange, obstaculo))
             {
@@ -134,7 +141,7 @@ public class GatoVision : MonoBehaviour
                 temp = transform.InverseTransformPoint(transform.position + dir);
                 //temp = transform.position + dir;
                 vertices[i] = new Vector3(temp.x, 0.1f, temp.z);
-                gatoanimator.SetBool("Gato idle", true);
+
             }
 
         } // end raycast loop
@@ -175,6 +182,19 @@ public class GatoVision : MonoBehaviour
         //Gizmos.DrawWireSphere(transform.position, viewDistance);
     }
 
-    
+    [SerializeField] private bool isAlive;
+    [SerializeField] private GameObject playerPrefab;
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            if (isAlive == true)
+            {
+                //Destroy(playerPrefab);
+                playerPrefab.SetActive(false);
+                Time.timeScale = 0f;
+            }
+        }
+    }
 }
 

@@ -7,8 +7,9 @@ public class Escalar : MonoBehaviour
     [Header("References")]
     public Transform orientation;
     public Rigidbody rb;
-    public ControlPlayer pm;
+    public ControlRaton pm;
     public LayerMask whatIsWall;
+    public Transform esfera;
     //public Transform raton;
     
 
@@ -92,12 +93,14 @@ public class Escalar : MonoBehaviour
     private void WallCheck()
     {
         wallFront = Physics.SphereCast(transform.position, sphereCastRadius, orientation.forward, out frontWallHit, detectionLength, whatIsWall);
+
         wallLookAngle = Vector3.Angle(orientation.forward, -frontWallHit.normal);
 
         bool newWall = frontWallHit.transform != lastWall || Mathf.Abs(Vector3.Angle(lastWallNormal, frontWallHit.normal)) > minWallNormalAngleChange;
 
         if ((wallFront && newWall) || pm.grounded)
-        {
+
+            {
             climbTimer = maxClimbTime;
             climbJumpsLeft = climbJumps;
         }
@@ -143,5 +146,11 @@ public class Escalar : MonoBehaviour
         rb.AddForce(forceToApply, ForceMode.Impulse);
 
         climbJumpsLeft--;
+    }
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, sphereCastRadius);
+        //Gizmos.DrawWireSphere(transform.position, viewDistance);
     }
 }

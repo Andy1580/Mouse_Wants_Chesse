@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,7 +35,7 @@ public class ControlRaton : MonoBehaviour
     [Header("Keybinds")]
     //public KeyCode jumpKey = KeyCode.Space;
     public KeyCode sprintKey = KeyCode.LeftShift;
-    public KeyCode stealthKey = KeyCode.LeftControl;
+    //public KeyCode stealthKey = KeyCode.LeftControl;
     public KeyCode thorw = KeyCode.X;
 
     [Header("Ground Check")]
@@ -75,6 +76,22 @@ public class ControlRaton : MonoBehaviour
         if (other.tag == "Bola")
         {
             item = other.GameObject();
+        }
+        if (other.gameObject.layer == 7)
+        {
+            if (InventarioRaton.HayEspacios)
+            {
+                Item item = other.GetComponent<Item>();
+                InventarioRaton.Agregarltem(item.ItemSo);
+                if (item.gameObject.CompareTag("Queso"))
+                {
+                    _quesos++;
+                }
+                contador.text = _quesos.ToString();
+                other.gameObject.SetActive(false);
+                //Destroy(other.gameObject);
+            }
+
         }
     }
 
@@ -129,12 +146,14 @@ public class ControlRaton : MonoBehaviour
     private void Update()
     {
         // ground check
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        //grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+        grounded = true;
 
         MyInput();
         SpeedControl();
         StateHandler();
         Throw();
+        Estamina();
 
         if(stealth == true)
         {
@@ -151,20 +170,20 @@ public class ControlRaton : MonoBehaviour
         else
             rb.drag = 0;
 
-        if (estamina > 0 && !stealth)
-            state = MovementState.sprinting;
-        else
-        {
-            IndicadorRun.gameObject.SetActive(false);
-            running = false;
-        }
-        if (estamina > 0 && !running)
-            state = MovementState.stealthing;
-        else
-        {
-            IndicadorSig.gameObject.SetActive(false);
-            stealth = false;
-        }
+        //if (estamina > 0 && !stealth)
+        //    state = MovementState.sprinting;
+        //else
+        //{
+        //    IndicadorRun.gameObject.SetActive(false);
+        //    running = false;
+        //}
+        //if (estamina > 0 && !running)
+        //    state = MovementState.stealthing;
+        //else
+        //{
+        //    IndicadorSig.gameObject.SetActive(false);
+        //    stealth = false;
+        //}
         if(running == true)
         {
             animator.SetBool("IsRunning", true);
@@ -173,6 +192,21 @@ public class ControlRaton : MonoBehaviour
         {
             animator.SetBool("IsRunning", false);
         }
+
+        if(estamina>0)
+        {
+            if(running == true)
+            {
+                IndicadorRun.gameObject.SetActive(true);
+            }
+
+            if(stealth == true)
+            {
+                IndicadorSig.gameObject.SetActive(true);
+            }
+
+        }
+
 
     }
 
@@ -216,20 +250,22 @@ public class ControlRaton : MonoBehaviour
         //    Invoke(nameof(ResetJump), jumpCooldown);
         //}
 
-        // start stealth
-        if (Input.GetKeyDown(stealthKey))
-        {
-            stealth = true;
-            IndicadorSig.gameObject.SetActive(true);
-            //rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
-        }
 
-        // stop stealth
-        if (Input.GetKeyUp(stealthKey))
-        {
-            stealth = false;
-            IndicadorSig.gameObject.SetActive(true);
-        }
+        //RECORDAR REACTIVAR MAS TARDE
+        // start stealth
+        //if (Input.GetKeyDown(stealthKey))
+        //{
+        //    stealth = true;
+        //    IndicadorSig.gameObject.SetActive(true);
+        //    //rb.AddForce(Vector3.down * 5f, ForceMode.Impulse);
+        //}
+
+        //// stop stealth
+        //if (Input.GetKeyUp(stealthKey))
+        //{
+        //    stealth = false;
+        //    IndicadorSig.gameObject.SetActive(false);
+        //}
         // start run
         if (Input.GetKeyDown(sprintKey))
         {
@@ -256,24 +292,25 @@ public class ControlRaton : MonoBehaviour
             animator.SetBool("IsClimbing", true);
         }
         // Mode - Stealing
-        else if (Input.GetKey(stealthKey))
-        {
-            if (estamina > 0)
-            {
-                state = MovementState.stealthing;
-                stealth = true;
-                moveSpeed = stealthSpeed;
-                IndicadorSig.gameObject.SetActive(true);
-                estamina -= stealcost * Time.deltaTime;
-                if (estamina < 0) estamina = 0;
-                StaminaBar.fillAmount = estamina / MaxStamina;
+        //RECORDAR REACTIVAR MAS TARDE
+        //else if (Input.GetKey(stealthKey))
+        //{
+        //    if (estamina > 0)
+        //    {
+        //        state = MovementState.stealthing;
+        //        stealth = true;
+        //        moveSpeed = stealthSpeed;
+        //        IndicadorSig.gameObject.SetActive(true);
+        //        estamina -= stealcost * Time.deltaTime;
+        //        if (estamina < 0) estamina = 0;
+        //        StaminaBar.fillAmount = estamina / MaxStamina;
                 
-            }
+        //    }
 
-        }
+        //}
 
         // Mode - Sprinting
-        else if (grounded && Input.GetKey(sprintKey))
+        else if (Input.GetKey(sprintKey))
         {
             if (estamina > 0)
             {
@@ -386,10 +423,14 @@ public class ControlRaton : MonoBehaviour
     }
     public void Estamina()
     {
-        if (estamina <= MaxStamina)
+        if (estamina <= MaxStamina && running == false)
+       
             estamina += estaminareg * Time.deltaTime;
         StaminaBar.fillAmount = estamina / MaxStamina;
         //transform.position = refugio.position;
 
     }
+    public TMP_Text contador;
+    public int _quesos;
+
 }
