@@ -12,6 +12,10 @@ public class Gato : MonoBehaviour
     public LayerMask capPlayer; // Layer que verificara
     public bool alerta; // si/no de que escucho al personaje
 
+    public bool bola; // la bola esta en su rango
+    public LayerMask capBola; // Layer que verificara
+    public Transform Bola;
+
     ////var idle:AnimationClip; //Animación en estado de reposo
     ////var run:AnimationClip; //Animación de correr o perseguir
 
@@ -24,13 +28,21 @@ public class Gato : MonoBehaviour
     public void Update()
     {
         alerta = Physics.CheckSphere(transform.position, MaxDist, capPlayer);
+        bola = Physics.CheckSphere(transform.position, MaxDist, capBola);
 
-
-        if (alerta == true)
+        if (alerta == true && bola == false)
         {
             Vector3 posPlayer = new Vector3(Player.position.x, Player.position.y, Player.position.z);
             transform.LookAt(posPlayer);
             //transform.position = Vector3.MoveTowards(transform.position, posPlayer, MoveSpeed * Time.deltaTime);
+        }
+
+        if (alerta == true && bola == true)
+        {
+            Vector3 posBola = new Vector3(Bola.position.x, Bola.position.y, Bola.position.z);
+            transform.LookAt(posBola);
+            //transform.position = Vector3.MoveTowards(transform.position, posPlayer, MoveSpeed * Time.deltaTime);
+            return;
         }
 
 

@@ -1,11 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ControlPlayer : MonoBehaviour
+public class ControlRaton : MonoBehaviour
 {
     [Header("Movement")]
     private float moveSpeed;
@@ -56,7 +55,7 @@ public class ControlPlayer : MonoBehaviour
 
     Vector3 moveDirection;
 
-    Rigidbody rb;
+    public Rigidbody rb;
     public Image StaminaBar;
     public Image IndicadorRun;
     public Image IndicadorSig;
@@ -81,9 +80,9 @@ public class ControlPlayer : MonoBehaviour
 
     private void Throw()
     {
-        if(Input.GetKeyDown(thorw))
+        if (Input.GetKeyDown(thorw))
         {
-            if(item == enabled)
+            if (item == enabled)
             {
                 item.transform.position = orientation.position + (orientation.forward * 2); ;
                 item.SetActive(true);
@@ -119,7 +118,7 @@ public class ControlPlayer : MonoBehaviour
     private void Start()
     {
         //animator = GetComponent<Animator>();
-        GetComponent<Transform>().position = start.position;
+        //GetComponent<Transform>().position = start.position;
         //rb = GetComponent<Rigidbody>(); 2/12/23
         rb.freezeRotation = true;
         estamina = MaxStamina;
@@ -147,14 +146,14 @@ public class ControlPlayer : MonoBehaviour
             state = MovementState.sprinting;
         else
         {
-            IndicadorRun.gameObject.SetActive(false);
+            //IndicadorRun.gameObject.SetActive(false);
             running = false;
         }
         if (estamina > 0 && !running)
             state = MovementState.stealthing;
         else
         {
-            IndicadorSig.gameObject.SetActive(false);
+            //IndicadorSig.gameObject.SetActive(false);
             stealth = false;
         }
     }
@@ -212,7 +211,7 @@ public class ControlPlayer : MonoBehaviour
     private void StateHandler()
     {
         // Mode - Climbing
-        if(climbing)
+        if (climbing)
         {
             state = MovementState.climbing;
             desiredMoveSpeed = climbSpeed;
@@ -221,7 +220,8 @@ public class ControlPlayer : MonoBehaviour
         // Mode - Stealing
         else if (Input.GetKey(stealthKey))
         {
-            if(estamina > 0) {
+            if (estamina > 0)
+            {
                 state = MovementState.stealthing;
                 stealth = true;
                 moveSpeed = stealthSpeed;
@@ -237,7 +237,7 @@ public class ControlPlayer : MonoBehaviour
         // Mode - Sprinting
         else if (grounded && Input.GetKey(sprintKey))
         {
-            if(estamina >= 0)
+            if (estamina >= 0)
             {
                 state = MovementState.sprinting;
                 running = true;
@@ -285,7 +285,7 @@ public class ControlPlayer : MonoBehaviour
         else if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
 
-         //in air
+        //in air
         else if (!grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
 

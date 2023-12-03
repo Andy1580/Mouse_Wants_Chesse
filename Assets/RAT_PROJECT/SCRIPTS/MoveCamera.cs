@@ -10,6 +10,12 @@ public class MoveCamera : MonoBehaviour
     {
         transform.position = cameraPosition.position;
 
+
+        //con los nuevos modelos
+        //transform.rotation = cameraPosition.rotation; transform.localScale = cameraPosition.localScale;
+            //Quaternion.Euler(0, 90, -180);
+
+
     }
 
 }

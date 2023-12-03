@@ -9,11 +9,8 @@ EditorBuildSettings:
     path: Assets/RAT_PROJECT/SCENES/INICIO.unity
     guid: eeb0b175d98750543945e0c24c854dd9
   - enabled: 1
-    path: Assets/RAT_PROJECT/SCENES/LEVEL1.unity
-    guid: fe9afe941e4ba844c90c3f545fcfbf3a
-  - enabled: 1
-    path: Assets/RAT_PROJECT/SCENES/LEVEL2.unity
-    guid: 82f397112cc77b548868527d556eac99
+    path: Assets/RAT_PROJECT/JOSE/JOSETEST.unity
+    guid: aeab7929c47a59a42905aa2a3dd81a55
   - enabled: 1
     path: Assets/RAT_PROJECT/SCENES/CREDITS.unity
     guid: 153ff57763ab6e745b68599ac777af13
