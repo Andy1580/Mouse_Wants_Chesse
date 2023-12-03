@@ -66,7 +66,7 @@ public class ControlRaton : MonoBehaviour
 
     public GameObject item;
     public float fuerza;
-    //public Animator animator;
+    public Animator animator;
 
     [SerializeField] public Transform start;
 
@@ -117,7 +117,7 @@ public class ControlRaton : MonoBehaviour
 
     private void Start()
     {
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
         //GetComponent<Transform>().position = start.position;
         //rb = GetComponent<Rigidbody>(); 2/12/23
         rb.freezeRotation = true;
@@ -136,6 +136,15 @@ public class ControlRaton : MonoBehaviour
         StateHandler();
         Throw();
 
+        if(stealth == true)
+        {
+            animator.SetBool("IsStealth", true);
+        }
+        else
+        {
+            animator.SetBool("IsStealth", false);
+        }
+
         // handle drag
         if (grounded)
             rb.drag = groundDrag;
@@ -146,27 +155,56 @@ public class ControlRaton : MonoBehaviour
             state = MovementState.sprinting;
         else
         {
-            //IndicadorRun.gameObject.SetActive(false);
+            IndicadorRun.gameObject.SetActive(false);
             running = false;
         }
         if (estamina > 0 && !running)
             state = MovementState.stealthing;
         else
         {
-            //IndicadorSig.gameObject.SetActive(false);
+            IndicadorSig.gameObject.SetActive(false);
             stealth = false;
         }
+        if(running == true)
+        {
+            animator.SetBool("IsRunning", true);
+        }
+        else
+        {
+            animator.SetBool("IsRunning", false);
+        }
+
     }
 
     private void FixedUpdate()
     {
         MovePlayer();
     }
-
+    public bool moviendose;
     private void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
+
+        if (Input.GetAxisRaw("Horizontal") != 0 && running == false && stealth == false)
+        {
+            moviendose = true;
+            animator.SetBool("IsWalking", true);
+        }
+
+        if (Input.GetAxisRaw("Vertical") != 0 && running == false && stealth == false)
+        {
+            moviendose = true;
+            animator.SetBool("IsWalking", true);
+        }
+
+        //if (Input.GetAxisRaw("Horizontal") > 0 && Input.GetAxisRaw("Verrtical") > 0)
+        //{
+        //    moviendose = true;
+        //    animator.SetBool("IsWalking", true);
+        //}
+        else
+            animator.SetBool("IsWalking", false);
 
         // when to jump
         //if (Input.GetKey(jumpKey) && readyToJump && grounded)
@@ -215,7 +253,7 @@ public class ControlRaton : MonoBehaviour
         {
             state = MovementState.climbing;
             desiredMoveSpeed = climbSpeed;
-            //animator.SetBool("IsCiming", true);
+            animator.SetBool("IsClimbing", true);
         }
         // Mode - Stealing
         else if (Input.GetKey(stealthKey))
@@ -229,7 +267,7 @@ public class ControlRaton : MonoBehaviour
                 estamina -= stealcost * Time.deltaTime;
                 if (estamina < 0) estamina = 0;
                 StaminaBar.fillAmount = estamina / MaxStamina;
-                //animator.SetBool("IsStealth", true);
+                
             }
 
         }
@@ -237,7 +275,7 @@ public class ControlRaton : MonoBehaviour
         // Mode - Sprinting
         else if (grounded && Input.GetKey(sprintKey))
         {
-            if (estamina >= 0)
+            if (estamina > 0)
             {
                 state = MovementState.sprinting;
                 running = true;
@@ -246,7 +284,7 @@ public class ControlRaton : MonoBehaviour
                 estamina -= runcost * Time.deltaTime;
                 if (estamina < 0) estamina = 0;
                 StaminaBar.fillAmount = estamina / MaxStamina;
-                //animator.SetBool("IsRunning", true);
+                
             }
 
         }
@@ -256,14 +294,13 @@ public class ControlRaton : MonoBehaviour
         {
             state = MovementState.walking;
             moveSpeed = walkSpeed;
-            //animator.SetBool("IsWalking", true);
         }
 
         // Mode - Air
         else
         {
             state = MovementState.air;
-            //animator.SetBool("IsWalking", true);
+          
         }
     }
 
