@@ -10,6 +10,7 @@ public class Escalar : MonoBehaviour
     public ControlRaton pm;
     public LayerMask whatIsWall;
     public Transform esfera;
+    public Animator escalar;
     //public Transform raton;
     
 
@@ -62,11 +63,12 @@ public class Escalar : MonoBehaviour
             if (!climbing && climbTimer > 0) StartClimbing();
             //raton.rotation = Quaternion.Euler(-90f, 0, 0);
             //camara.rotation = Quaternion.Euler(-90f, 0, 0);
-
+            
             // timer
             if (climbTimer > 0) climbTimer -= Time.deltaTime;
             if (climbTimer < 0) StopClimbing();
             
+
         }
 
         // State 2 - Exiting
@@ -77,6 +79,7 @@ public class Escalar : MonoBehaviour
             
             if (exitWallTimer > 0) exitWallTimer -= Time.deltaTime;
             if (exitWallTimer < 0) exitingWall = false;
+  
         }
 
         // State 3 - None
@@ -113,7 +116,6 @@ public class Escalar : MonoBehaviour
 
         lastWall = frontWallHit.transform;
         lastWallNormal = frontWallHit.normal;
-        
 
         /// idea - camera fov change
     }

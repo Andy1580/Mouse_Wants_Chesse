@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -68,6 +69,7 @@ public class ControlRaton : MonoBehaviour
     public GameObject item;
     public float fuerza;
     public Animator animator;
+    public Escalar EscalarX;
 
     [SerializeField] public Transform start;
 
@@ -141,13 +143,17 @@ public class ControlRaton : MonoBehaviour
         estamina = MaxStamina;
         //jump
         //readyToJump = true;
+        
+        
     }
 
     private void Update()
     {
         // ground check
         //grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
+        grounded = true;
+        climbing = EscalarX.climbing;
+        Debug.Log(EscalarX.climbing);
         MyInput();
         SpeedControl();
         StateHandler();
@@ -191,8 +197,16 @@ public class ControlRaton : MonoBehaviour
         {
             animator.SetBool("IsRunning", false);
         }
+        if (climbing == true)
+        {
+            animator.SetBool("IsClimbing", true);
+        }
+        else
+        {
+            animator.SetBool("IsClimbing", false);
+        }
 
-        if(estamina>0)
+        if (estamina>0)
         {
             if(running == true)
             {
@@ -219,25 +233,37 @@ public class ControlRaton : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetAxisRaw("Horizontal") != 0 && running == false && stealth == false)
+        if (Input.GetAxisRaw("Horizontal") != 0 && running == false && stealth == false && climbing == false)
         {
             moviendose = true;
             animator.SetBool("IsWalking", true);
         }
 
-        if (Input.GetAxisRaw("Vertical") != 0 && running == false && stealth == false)
+        if (Input.GetAxisRaw("Vertical") != 0 && running == false && stealth == false && climbing == false)
         {
             moviendose = true;
             animator.SetBool("IsWalking", true);
         }
-
-        //if (Input.GetAxisRaw("Horizontal") > 0 && Input.GetAxisRaw("Verrtical") > 0)
+        //if (Input.GetAxisRaw("Horizontal") != 0 && running == false && stealth == false && climbing == true)
         //{
-        //    moviendose = true;
-        //    animator.SetBool("IsWalking", true);
+        //    moviendose = false;
+        //    animator.SetBool("IsWalking", false);
+        //    animator.SetBool("IsClimbing", true);
+        //}
+        //if (Input.GetAxisRaw("Vertical") != 0 && running == false && stealth == false && climbing == true)
+        //{
+        //    moviendose = false;
+        //    animator.SetBool("IsWalking", false);
+        //    animator.SetBool("IsClimbing", true);
         //}
         else
+        {
+            moviendose = false;
             animator.SetBool("IsWalking", false);
+        }
+
+        
+
 
         // when to jump
         //if (Input.GetKey(jumpKey) && readyToJump && grounded)
@@ -280,15 +306,14 @@ public class ControlRaton : MonoBehaviour
             IndicadorRun.gameObject.SetActive(false);
         }
     }
-
     private void StateHandler()
     {
         // Mode - Climbing
+        
         if (climbing)
         {
             state = MovementState.climbing;
             desiredMoveSpeed = climbSpeed;
-            animator.SetBool("IsClimbing", true);
         }
         // Mode - Stealing
         //RECORDAR REACTIVAR MAS TARDE

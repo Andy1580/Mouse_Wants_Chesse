@@ -184,17 +184,33 @@ public class GatoVision : MonoBehaviour
 
     [SerializeField] private bool isAlive;
     [SerializeField] private GameObject playerPrefab;
-    private void OnCollisionEnter(Collision collision)
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
             if (isAlive == true)
             {
                 //Destroy(playerPrefab);
-                playerPrefab.SetActive(false);
-                Time.timeScale = 0f;
+                //playerPrefab.SetActive(false);
+
+                agent.Stop(Player);
+                playerPrefab.GetComponent<Animator>().SetBool("IsDead",true); ;
+                
             }
         }
     }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Player")
+    //    {
+    //        if (isAlive == true)
+    //        {
+    //            Destroy(playerPrefab);
+    //            playerPrefab.SetActive(false);
+    //            Time.timeScale = 0f;
+    //        }
+    //    }
+    //}
 }
 
