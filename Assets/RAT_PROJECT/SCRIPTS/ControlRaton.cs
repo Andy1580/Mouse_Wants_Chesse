@@ -159,6 +159,7 @@ public class ControlRaton : MonoBehaviour
         StateHandler();
         Throw();
         Estamina();
+        Dead();
 
         if(stealth == true)
         {
@@ -457,4 +458,14 @@ public class ControlRaton : MonoBehaviour
     public TMP_Text contador;
     public int _quesos;
 
+    [SerializeField] private GatoVision ratdead;
+    private void  Dead()
+    {
+        if(ratdead.RatDead==true)
+        {
+            horizontalInput = 0;
+            verticalInput = 0;
+        }
+        
+    }
 }

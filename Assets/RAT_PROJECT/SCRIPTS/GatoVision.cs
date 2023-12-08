@@ -38,6 +38,7 @@ public class GatoVision : MonoBehaviour
     public bool distraction; // si/no de que escucho al personaje
 
     public Animator gatoanimator;
+    public bool RatDead;
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -191,9 +192,10 @@ public class GatoVision : MonoBehaviour
         {
             if (isAlive == true)
             {
+                RatDead = true;
                 //Destroy(playerPrefab);
                 //playerPrefab.SetActive(false);
-
+                gatoanimator.SetBool("IsRunning", false);
                 agent.Stop(Player);
                 playerPrefab.GetComponent<Animator>().SetBool("IsDead",true); ;
                 
