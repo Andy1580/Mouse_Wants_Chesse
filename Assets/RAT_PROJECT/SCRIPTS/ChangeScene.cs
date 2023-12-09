@@ -12,6 +12,7 @@ public class ChangeScene : MonoBehaviour
 
     public void Level1()
     {
+
         SceneManager.LoadScene("JOSETEST");
     }
 

@@ -137,7 +137,7 @@ public class ControlRaton : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        //GetComponent<Transform>().position = start.position;
+        GetComponent<Transform>().position = start.position;
         //rb = GetComponent<Rigidbody>(); 2/12/23
         rb.freezeRotation = true;
         estamina = MaxStamina;

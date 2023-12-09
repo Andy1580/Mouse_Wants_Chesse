@@ -5,7 +5,8 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public Jugador jugador;
+    public ControlRaton jugador;
+    public GatoVision muerto;
     public TMP_Text alertatx;
     public Animator popupAnimator;
     private Queue<string> popupQueue; //make it different type for more detailed popups, you can add different types, titles, descriptions etc
@@ -17,35 +18,60 @@ public class GameManager : MonoBehaviour
     [SerializeField] public GameObject queso2;
     [SerializeField] public GameObject alertaObj;
 
-
-
+    public GameObject PanelEstamina;
+    public GameObject PanelCorrer;
+    public GameObject Panelsigilo;
+    public GameObject PanelItem;
+    public GameObject PanelObjetivos;
+    public GameObject core;
+    public GameObject instrucciones;
+    public GameObject lose;
 
 
     private void Start()
     {
-        
+        core.SetActive(true);
+        instrucciones.SetActive(false);
+        Time.timeScale = 0f;
         alertaObj.gameObject.SetActive(false);
-
-        alertaObj = transform.GetChild(0).gameObject;
         popupAnimator = alertaObj.GetComponent<Animator>();
         alertaObj.SetActive(false);
         popupQueue = new Queue<string>();
+
+        PanelEstamina.SetActive(false);
+        PanelCorrer.SetActive(false);
+        Panelsigilo.SetActive(false);
+        PanelItem.SetActive(false);
+        PanelObjetivos.SetActive(false);
+        lose.SetActive(false);
     }
     private void Update()
     {
-
+        if(muerto.RatDead == true)
+        {
+            PanelEstamina.SetActive(false);
+            PanelCorrer.SetActive(false);
+            Panelsigilo.SetActive(false);
+            PanelItem.SetActive(false);
+            PanelObjetivos.SetActive(false);
+            lose.SetActive(true);
+        }
     
     }
-
-    //public IEnumerator Alerta(string message)
+    //private void Alertas ()
     //{
     //    if (jugador._quesos == 3)
     //    {
+    //        Alerta(message);
+    //    }
+    //}
+    //public IEnumerator Alerta(string message)
+    //{
+
     //        message = alertatx.text;
     //        alertatx.text = "Rapido vuelve a la guarida!!!";
     //        AddToQueue(alertatx.text);
     //        //ShowPopup(alertatx.text);
-    //    }
 
     //}
 
@@ -79,6 +105,23 @@ public class GameManager : MonoBehaviour
         } while (popupQueue.Count > 0);
         alertaObj.SetActive(false);
         queueChecker = null;
+    }
+     
+    public void Controles()
+    {
+        core.SetActive(false);
+        instrucciones.SetActive(true);
+    }
+
+    public void Iniciar()
+    {
+        instrucciones.SetActive(false);
+        Time.timeScale = 1f;
+        PanelEstamina.SetActive(true);
+        PanelCorrer.SetActive(true);
+        Panelsigilo.SetActive(true);
+        PanelItem.SetActive(true);
+        PanelObjetivos.SetActive(true);
     }
 
 }

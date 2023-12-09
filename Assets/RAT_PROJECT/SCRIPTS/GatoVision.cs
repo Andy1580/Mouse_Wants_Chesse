@@ -101,7 +101,7 @@ public class GatoVision : MonoBehaviour
             Debug.DrawRay(Cat.transform.position, dir, Color.green); // to aid visualization
 
 
-            if (Physics.Raycast(transform.position, dir, out hit, sightRange, playerLayer))
+            if (Physics.Raycast(transform.position, dir, out hit, sightRange, playerLayer) && RatDead == false)
             {
                 temp = transform.InverseTransformPoint(hit.point);
                 //temp = hit.point;
@@ -109,12 +109,15 @@ public class GatoVision : MonoBehaviour
                 Debug.DrawLine(Cat.transform.position, hit.point, Color.red); // agregar color
                 Debug.Log("¡Jugador detectado!");
                 agent.SetDestination(Player.transform.position);
-                gatoanimator.SetBool("IsRunning", true);
-
+                
+              
                 //Vector3 posPlayer = new Vector3(Player.position.x, transform.position.y, Player.position.z);
                 //transform.position = Vector3.MoveTowards(transform.position, posPlayer, MoveSpeed * Time.deltaTime);
 
             }
+
+                
+           
 
 
             if (Physics.Raycast(transform.position, dir, out hit, sightRange, capBola))
@@ -128,21 +131,21 @@ public class GatoVision : MonoBehaviour
             }
 
 
-            if (Physics.Raycast(transform.position, dir, out hit, sightRange, obstaculo))
-            {
-                temp = transform.InverseTransformPoint(hit.point);
-                //temp = hit.point;
-                vertices[i] = new Vector3(temp.x, 0.1f, temp.z);
-                Debug.DrawLine(Cat.transform.position, hit.point, Color.cyan); // agregar color
-                Debug.Log("Muro");
-            }
+            //if (Physics.Raycast(transform.position, dir, out hit, sightRange, obstaculo))
+            //{
+            //    temp = transform.InverseTransformPoint(hit.point);
+            //    //temp = hit.point;
+            //    vertices[i] = new Vector3(temp.x, 0.1f, temp.z);
+            //    Debug.DrawLine(Cat.transform.position, hit.point, Color.cyan); // agregar color
+            //    Debug.Log("Muro");
+            //}
 
             else
             {
                 temp = transform.InverseTransformPoint(transform.position + dir);
                 //temp = transform.position + dir;
                 vertices[i] = new Vector3(temp.x, 0.1f, temp.z);
-
+                
             }
 
         } // end raycast loop
