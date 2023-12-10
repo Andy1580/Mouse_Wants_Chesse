@@ -70,6 +70,10 @@ public class ControlRaton : MonoBehaviour
     public float fuerza;
     public Animator animator;
     public Escalar EscalarX;
+    public Canvas estambre;
+    public Image bola;
+    public Transform lanzar;
+
 
     [SerializeField] public Transform start;
 
@@ -78,6 +82,10 @@ public class ControlRaton : MonoBehaviour
         if (other.tag == "Bola")
         {
             item = other.GameObject();
+            //item.gameObject.tag = "Ball";
+            //estambre.AddComponent<Image>();
+            //estambre.GetComponentInChildren<Image>().GetComponentInChildren<Image>().enabled=true;
+
         }
         if (other.gameObject.layer == 7)
         {
@@ -103,13 +111,17 @@ public class ControlRaton : MonoBehaviour
         {
             if (item == enabled)
             {
-                item.transform.position = orientation.position + (orientation.forward * 2); ;
+                item.GetComponent<Levitation>().enabled = false;
+                item.transform.rotation = lanzar.rotation;
+                item.transform.position = lanzar.position + (lanzar.forward * 2); ;
                 item.SetActive(true);
                 item.GetComponent<Rigidbody>().isKinematic = false;
-                item.GetComponent<Rigidbody>().AddForce(orientation.forward * fuerza, ForceMode.Impulse);
-                item.GetComponent<Rigidbody>().AddForce(orientation.up * (fuerza - 2), ForceMode.Impulse);
+                item.GetComponent<Rigidbody>().AddForce(lanzar.forward * fuerza, ForceMode.Impulse);
+                item.GetComponent<Rigidbody>().AddForce(lanzar.up * 10, ForceMode.Impulse);
                 item.GetComponent<Rigidbody>().useGravity = true;
+                //item.gameObject.tag = "Bola";
                 item = null;
+
             }
 
         }
@@ -137,7 +149,7 @@ public class ControlRaton : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
-        GetComponent<Transform>().position = start.position;
+        GetComponent<Transform>().position = start.position; 
         //rb = GetComponent<Rigidbody>(); 2/12/23
         rb.freezeRotation = true;
         estamina = MaxStamina;
@@ -190,13 +202,15 @@ public class ControlRaton : MonoBehaviour
         //    IndicadorSig.gameObject.SetActive(false);
         //    stealth = false;
         //}
-        if(running == true)
+        if(running == true && estamina > 0)
         {
             animator.SetBool("IsRunning", true);
+            IndicadorRun.gameObject.SetActive(true);
         }
         else
         {
             animator.SetBool("IsRunning", false);
+            IndicadorRun.gameObject.SetActive(false);
         }
         if (climbing == true)
         {
@@ -207,19 +221,19 @@ public class ControlRaton : MonoBehaviour
             animator.SetBool("IsClimbing", false);
         }
 
-        if (estamina>0)
-        {
-            if(running == true)
-            {
-                IndicadorRun.gameObject.SetActive(true);
-            }
+        //if (estamina>0)
+        //{
+        //    if(running == true)
+        //    {
+        //        IndicadorRun.gameObject.SetActive(true);
+        //    }
 
-            if(stealth == true)
-            {
-                IndicadorSig.gameObject.SetActive(true);
-            }
+        //    if(stealth == true)
+        //    {
+        //        IndicadorSig.gameObject.SetActive(true);
+        //    }
 
-        }
+        //}
 
 
     }

@@ -6,10 +6,10 @@ using UnityEngine.UI;
 public class SlotItem : MonoBehaviour
 {
     private ItemSo _itemSo;
-    private Image icono;
+    public Image icono;
     void Awake()
     {
-        icono = transform.GetChild(0).GetComponent<Image>();
+        icono = GetComponent<Image>();
     }
 
     public void Seleccionar()

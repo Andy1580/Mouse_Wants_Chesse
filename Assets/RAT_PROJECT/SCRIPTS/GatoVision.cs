@@ -37,6 +37,8 @@ public class GatoVision : MonoBehaviour
     public LayerMask capBola; // Layer que verificara
     public bool distraction; // si/no de que escucho al personaje
 
+    public Transform home;
+
     public Animator gatoanimator;
     public bool RatDead;
     private void Awake()
@@ -101,24 +103,31 @@ public class GatoVision : MonoBehaviour
             Debug.DrawRay(Cat.transform.position, dir, Color.green); // to aid visualization
 
 
-            if (Physics.Raycast(transform.position, dir, out hit, sightRange, playerLayer) && RatDead == false)
+            if (Physics.Raycast(transform.position, dir, out hit, sightRange, playerLayer) && RatDead == false && Physics.Raycast(transform.position, dir, out hit, sightRange, capBola) == false)
             {
                 temp = transform.InverseTransformPoint(hit.point);
                 //temp = hit.point;
                 vertices[i] = new Vector3(temp.x, 0.1f, temp.z);
                 Debug.DrawLine(Cat.transform.position, hit.point, Color.red); // agregar color
                 Debug.Log("¡Jugador detectado!");
+                //transform.position = hit.point;
+                //agent.SetDestination(transform.position = hit.point);
                 agent.SetDestination(Player.transform.position);
-                
-              
+
+
                 //Vector3 posPlayer = new Vector3(Player.position.x, transform.position.y, Player.position.z);
                 //transform.position = Vector3.MoveTowards(transform.position, posPlayer, MoveSpeed * Time.deltaTime);
 
             }
+            else
+            {
+                agent.SetDestination(home.transform.position);
+                if(agent.transform.position == home.transform.position)
+                {
+                    gatoanimator.SetBool("IsRunning", false);
+                }
 
-                
-           
-
+            }
 
             if (Physics.Raycast(transform.position, dir, out hit, sightRange, capBola))
             {

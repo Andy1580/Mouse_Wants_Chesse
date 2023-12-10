@@ -12,12 +12,12 @@ public class Win : MonoBehaviour
     public GameObject Panelsigilo;
     public GameObject PanelItem;
     public GameObject PanelObjetivos;
-
+    public bool win;
         
 
     private void Start()
     {
-
+        win = false;
     }
     // Update is called once per frame
     void Update()
@@ -40,7 +40,7 @@ public class Win : MonoBehaviour
                 PanelObjetivos.SetActive(false);
                 pausa.SetActive(false);
                 PanelWin.SetActive(true) ;
-
+                win = true;
             }
         }
     }

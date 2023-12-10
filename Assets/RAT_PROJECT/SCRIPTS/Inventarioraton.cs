@@ -10,6 +10,7 @@ public class Inventarioraton : MonoBehaviour
     #region CORE
     private static Inventarioraton self;
     private Canvas canvas;
+    public ItemSo ItemSo;
     private void Awake()
     {
         self = this;
@@ -29,61 +30,61 @@ public class Inventarioraton : MonoBehaviour
     #region Panel Info
 
     [SerializeField] private Image icono;
-    [SerializeField] private TMP_Text nombre;
-    [SerializeField] private TMP_Text descripcion;
-    [SerializeField] private Button botonUsar;
-    [SerializeField] private Button botonSoltar;
-    private static SlotItem _slotSelecionado;
+    //[SerializeField] private TMP_Text nombre;
+    //[SerializeField] private TMP_Text descripcion;
+    //[SerializeField] private Button botonUsar;
+    //[SerializeField] private Button botonSoltar;
+    //private static SlotItem _slotSelecionado;
 
-    public static SlotItem SlotSeleccionado
-    {
-        get => _slotSelecionado;
-        set
-        {
-            _slotSelecionado = value;
+    //public static SlotItem SlotSeleccionado
+    //{
+    //    get => _slotSelecionado;
+    //    set
+    //    {
+    //        _slotSelecionado = value;
 
-            bool hayItem = false;
+    //        bool hayItem = false;
 
-            if (value)
-                if (value.ItemSo)
-                    hayItem = true;
+    //        if (value)
+    //            if (value.ItemSo)
+    //                hayItem = true;
 
-            if (hayItem)
-            {
-                self.icono.enabled = true;
-                self.icono.sprite = value.ItemSo.Icono;
-                self.nombre.text = value.ItemSo.Nombre;
-                self.descripcion.text = value.ItemSo.descripcion;
-                self.botonUsar.interactable = value.ItemSo.itemGo.Usable;
-                self.botonSoltar.interactable = true;
-            }
-            else
-            {
-                self.icono.enabled = false;
-                self.nombre.text = string.Empty;
-                self.descripcion.text = string.Empty;
-                self.botonSoltar.interactable = false;
-                self.botonUsar.interactable = false;
+    //        if (hayItem)
+    //        {
+    //            self.icono.enabled = true;
+    //            self.icono.sprite = value.ItemSo.Icono;
+    //            self.nombre.text = value.ItemSo.Nombre;
+    //            self.descripcion.text = value.ItemSo.descripcion;
+    //            self.botonUsar.interactable = value.ItemSo.itemGo.Usable;
+    //            self.botonSoltar.interactable = true;
+    //        }
+    //        else
+    //        {
+    //            self.icono.enabled = false;
+    //            self.nombre.text = string.Empty;
+    //            self.descripcion.text = string.Empty;
+    //            self.botonSoltar.interactable = false;
+    //            self.botonUsar.interactable = false;
 
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
 
-    public void UsarItem()
-    {
-        SlotSeleccionado.ItemSo.itemGo.Usar(Jugador.Self);
-        SlotSeleccionado.ItemSo = null;
-        SlotSeleccionado = null;
-    }
+    //public void UsarItem()
+    //{
+    //    SlotSeleccionado.ItemSo.itemGo.Usar(Jugador.Self);
+    //    SlotSeleccionado.ItemSo = null;
+    //    SlotSeleccionado = null;
+    //}
 
     public void SoltarItem()
     {
             Transform trans = Jugador.Self.transform;
             Vector3 posicion = trans.position + (trans.forward * 2);
             //SlotSeleccionado.rb.AddForce(Vector3.up * 80f, ForceMode.Force);//agregado 17/11/23
-            Instantiate(SlotSeleccionado.ItemSo.itemGo, posicion, Quaternion.identity);
-            SlotSeleccionado.ItemSo = null;
-            SlotSeleccionado = null;
+            //Instantiate(SlotSeleccionado.ItemSo.itemGo, posicion, Quaternion.identity);
+            //SlotSeleccionado.ItemSo = null;
+            //SlotSeleccionado = null;
     }
     #endregion
     #region Slots

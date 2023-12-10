@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.AI;
+using Unity.VisualScripting;
 
 
 public class Gato : MonoBehaviour
@@ -18,51 +19,22 @@ public class Gato : MonoBehaviour
     public Transform Bola;
     public NavMeshAgent agent;
     public Animator gatoanimator;
+    public Transform home;
+    public GameObject estambre;
 
-    ////var idle:AnimationClip; //Animación en estado de reposo
-    ////var run:AnimationClip; //Animación de correr o perseguir
-
+    //public Transform detenerse;
 
     public void Start()
     {
+        bola = false;
         isAlive = true;
         col = GetComponent<Collider>();
+        GetComponent<Transform>().position = home.position;
     }
 
     public void Update()
     {
-   
-            Deteccion();
-        
-
-            
-
-
-        //var EnemyPos = transform.position;
-        //var PlayerPos = Player.position;
-        //var distancia = Vector3.Distance(EnemyPos, PlayerPos);
-
-        //    if (distancia >= MinDist && distancia <= MaxDist)
-        //    {
-        //        var targetPos = new Vector3(Player.position.x,
-        //                                        this.transform.position.y,
-        //                                        Player.position.z);
-        //        transform.LookAt(targetPos);
-        //        transform.position += transform.forward * MoveSpeed * Time.deltaTime;
-        //        //animation.CrossFade(run.name, 1);
-        //        //for (var state ) //: AnimationState in animation
-        //        //{
-        //        //    state.speed = 2;
-        //        //}
-        //        //}
-        //        //else
-        //        //{
-        //        //    //animation.CrossFade(idle.name, 1);
-        //        //    for (var state /*: AnimationState in animation*/)
-        //        //    {
-        //        //        state.speed = 1;
-        //        //    }
-        //    }
+               Deteccion();
 
     }
 
@@ -71,7 +43,7 @@ public class Gato : MonoBehaviour
         alerta = Physics.CheckSphere(transform.position, MaxDist, capPlayer);
         bola = Physics.CheckSphere(transform.position, MaxDist, capBola);
 
-        if (alerta == true && bola == false)
+        if (alerta == true)
         {
             Vector3 posPlayer = new Vector3(Player.position.x, Player.position.y, Player.position.z);
             transform.LookAt(posPlayer);
@@ -79,23 +51,55 @@ public class Gato : MonoBehaviour
             gatoanimator.SetBool("IsRunning", true);
             //transform.position = Vector3.MoveTowards(transform.position, posPlayer, MoveSpeed * Time.deltaTime);
         }
-        if (alerta == true && bola == false && muerte.RatDead == true)
+        else if (alerta == false)
         {
-            Vector3 posPlayer = new Vector3(Player.position.x, Player.position.y, Player.position.z);
-            transform.LookAt(posPlayer);
-            gatoanimator.SetBool("IsRunning", false);
-            //transform.position = Vector3.MoveTowards(transform.position, posPlayer, MoveSpeed * Time.deltaTime);
+            transform.LookAt(home.transform.position);
+            agent.SetDestination(home.transform.position);
+            if (agent.transform.position == home.transform.position)
+            {
+                gatoanimator.SetBool("IsRunning", false);
+            }
         }
-
         if (alerta == true && bola == true)
         {
             Vector3 posBola = new Vector3(Bola.position.x, Bola.position.y, Bola.position.z);
             transform.LookAt(posBola);
-            //transform.position = Vector3.MoveTowards(transform.position, posPlayer, MoveSpeed * Time.deltaTime);
-            return;
+            Debug.Log("¡Bola de estambre detectado!");
+            agent.SetDestination(Bola.transform.position);
+            gatoanimator.SetBool("IsRunning", true);
         }
+        if (alerta == false && bola == true)
+        {
+            Vector3 posBola = new Vector3(Bola.position.x, Bola.position.y, Bola.position.z);
+            transform.LookAt(posBola);
+            Debug.Log("¡Bola de estambre detectado!");
+            agent.SetDestination(Bola.transform.position);
+            gatoanimator.SetBool("IsRunning", true);
+        }
+        //if (alerta == true && bola == true && muerte.RatDead == true)
+        //{
+        //    Vector3 posPlayer = new Vector3(Player.position.x, Player.position.y, Player.position.z);
+        //    transform.LookAt(posPlayer);
+        //    gatoanimator.SetBool("IsRunning", false);
+        //    //transform.position = Vector3.MoveTowards(transform.position, posPlayer, MoveSpeed * Time.deltaTime);
+        //}
+        //if (alerta == true && bola == true)
+        //{
+        //    Vector3 posBola = new Vector3(Bola.position.x, Bola.position.y, Bola.position.z);
+        //    transform.LookAt(posBola);
+        //    Debug.Log("¡Bola de estambre detectado!");
+        //    agent.SetDestination(Bola.transform.position);
+        //    gatoanimator.SetBool("IsRunning", true);
+        //}
+        //else
+        //{
+        //    agent.SetDestination(home.transform.position);
+        //    if (agent.transform.position == home.transform.position)
+        //    {
+        //        gatoanimator.SetBool("IsRunning", false);
+        //    }
+        //}
     }
-
 
     private void OnDrawGizmos()
     {
@@ -107,12 +111,11 @@ public class Gato : MonoBehaviour
     [SerializeField] private GameObject playerPrefab;
     Collider col;
 
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player")
         {
-            if (isAlive == true && muerte.RatDead == true)
+            if (isAlive == true)
             {
                 //Destroy(playerPrefab);
                 playerPrefab.SetActive(false);
@@ -120,5 +123,37 @@ public class Gato : MonoBehaviour
                 gatoanimator.SetBool("IsRunning", false);
             }
         }
+        if (other.gameObject.tag == "Bola")
+        {
+            Debug.Log("bolita");
+            //Destroy(playerPrefab);
+            estambre.SetActive(false);
+            //Time.timeScale = 0f;
+            gatoanimator.SetBool("IsRunning", false);
+
+        }
     }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.tag == "Player")
+    //    {
+    //        if (isAlive == true)
+    //        {
+    //            //Destroy(playerPrefab);
+    //            playerPrefab.SetActive(false);
+    //            Time.timeScale = 0f;
+    //            gatoanimator.SetBool("IsRunning", false);
+    //        }
+    //    }
+
+    //    if (collision.gameObject.tag == "Bola")
+    //    {
+    //            Debug.Log("bolita");
+    //            //Destroy(playerPrefab);
+    //            estambre.SetActive(false);
+    //            //Time.timeScale = 0f;
+    //            gatoanimator.SetBool("IsRunning", false);
+
+    //    }
+    //}
 }

@@ -15,16 +15,21 @@ public class Levitation : MonoBehaviour
 
     void Start()
     {
+        
         posOffset = transform.position;
     }
 
     void Update()
     {
+        Flotar();
+    }
+
+    public void Flotar()
+    {
         tempPos = posOffset;
         tempPos.y += Mathf.Sin(Time.fixedTime * Mathf.PI * frequency) * amplitude;
 
         transform.Rotate(Vector3.up, speed * Time.deltaTime);
-
 
         transform.position = tempPos;
     }

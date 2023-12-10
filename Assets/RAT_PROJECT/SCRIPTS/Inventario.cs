@@ -22,8 +22,8 @@ public class InventarioRaton : MonoBehaviour
 
 private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
-            canvas.enabled = !canvas.enabled;
+        //if (Input.GetKeyDown(KeyCode.I))
+        //    canvas.enabled = !canvas.enabled;
     }
     #endregion CORE
 
