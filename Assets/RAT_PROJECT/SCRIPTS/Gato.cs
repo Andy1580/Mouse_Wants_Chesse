@@ -38,8 +38,24 @@ public class Gato : MonoBehaviour
 
     public void Update()
     {
-               Deteccion();
+        Deteccion();
+        // Obtén la dirección de movimiento del agente
+        Vector3 direccionMovimiento = agent.velocity.normalized;
 
+        // Calcula la rotación basada en la dirección de movimiento
+        Quaternion rotacionDeseada = Quaternion.LookRotation(direccionMovimiento);
+
+        // Aplica la rotación al objeto
+        agent.transform.rotation = rotacionDeseada;
+
+        if (agent.isOnOffMeshLink)
+        {
+            gatoanimator.SetBool("IsJumping2", true);
+        }
+        else
+        {
+            gatoanimator.SetBool("IsJumping2", false);
+        }
     }
 
     public void Deteccion()
@@ -57,7 +73,7 @@ public class Gato : MonoBehaviour
         }
         else if (alerta == false)
         {
-            transform.LookAt(home.transform.position);
+            //transform.LookAt(home.transform.position);
             agent.SetDestination(home.transform.position);
             if (agent.transform.position == home.transform.position)
             {
@@ -80,29 +96,17 @@ public class Gato : MonoBehaviour
             agent.SetDestination(Bola.transform.position);
             gatoanimator.SetBool("IsRunning", true);
         }
-        //if (alerta == true && bola == true && muerte.RatDead == true)
-        //{
-        //    Vector3 posPlayer = new Vector3(Player.position.x, Player.position.y, Player.position.z);
-        //    transform.LookAt(posPlayer);
-        //    gatoanimator.SetBool("IsRunning", false);
-        //    //transform.position = Vector3.MoveTowards(transform.position, posPlayer, MoveSpeed * Time.deltaTime);
-        //}
-        //if (alerta == true && bola == true)
-        //{
-        //    Vector3 posBola = new Vector3(Bola.position.x, Bola.position.y, Bola.position.z);
-        //    transform.LookAt(posBola);
-        //    Debug.Log("¡Bola de estambre detectado!");
-        //    agent.SetDestination(Bola.transform.position);
-        //    gatoanimator.SetBool("IsRunning", true);
-        //}
-        //else
-        //{
-        //    agent.SetDestination(home.transform.position);
-        //    if (agent.transform.position == home.transform.position)
-        //    {
-        //        gatoanimator.SetBool("IsRunning", false);
-        //    }
-        //}
+        else if (alerta == false && bola == false && agent.transform.position != home.transform.position)
+        {
+            gatoanimator.SetBool("IsRunning", true);
+            //transform.LookAt(home.transform.position);
+            agent.SetDestination(home.transform.position);
+            if (agent.transform.position == home.transform.position)
+            {
+                gatoanimator.SetBool("IsRunning", false);
+            }
+        }
+
     }
 
     private void OnDrawGizmos()
@@ -140,27 +144,9 @@ public class Gato : MonoBehaviour
 
         }
     }
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.tag == "Player")
-    //    {
-    //        if (isAlive == true)
-    //        {
-    //            //Destroy(playerPrefab);
-    //            playerPrefab.SetActive(false);
-    //            Time.timeScale = 0f;
-    //            gatoanimator.SetBool("IsRunning", false);
-    //        }
-    //    }
 
-    //    if (collision.gameObject.tag == "Bola")
-    //    {
-    //            Debug.Log("bolita");
-    //            //Destroy(playerPrefab);
-    //            estambre.SetActive(false);
-    //            //Time.timeScale = 0f;
-    //            gatoanimator.SetBool("IsRunning", false);
 
-    //    }
-    //}
+
+
+
 }

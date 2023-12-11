@@ -73,7 +73,7 @@ public class ControlRaton : MonoBehaviour
     public Canvas estambre;
     public Image bola;
     public Transform lanzar;
-
+    public Pause pausa1;
 
     [SerializeField] public Transform start;
 
@@ -182,8 +182,11 @@ public class ControlRaton : MonoBehaviour
         MyInput();
         SpeedControl();
         StateHandler();
-        Throw();
-        Estamina();
+        if (pausa1.pauseCanvas == false)
+        {
+            Throw();
+        }
+            Estamina();
         Dead();
 
         if(stealth == true)

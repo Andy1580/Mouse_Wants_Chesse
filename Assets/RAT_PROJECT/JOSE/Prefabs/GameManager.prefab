@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &320482948840248514
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8427788821044621626}
+  - component: {fileID: 6345989103394137075}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8427788821044621626
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320482948840248514}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 562.4614, y: 657.6268, z: 204.89828}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6345989103394137075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320482948840248514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bee75ae88700fb9428dad5168d48a3bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jugador: {fileID: 0}
+  muerto: {fileID: 0}
+  acabado: {fileID: 0}
+  acabado1: {fileID: 0}
+  acabado2: {fileID: 0}
+  alertatx: {fileID: 0}
+  popupAnimator: {fileID: 0}
+  queso0: {fileID: 0}
+  queso1: {fileID: 0}
+  queso2: {fileID: 0}
+  alertaObj: {fileID: 0}
+  PanelEstamina: {fileID: 0}
+  PanelCorrer: {fileID: 0}
+  Panelsigilo: {fileID: 0}
+  PanelItem: {fileID: 0}
+  PanelObjetivos: {fileID: 0}
+  core: {fileID: 0}
+  instrucciones: {fileID: 0}
+  lose: {fileID: 0}
+  pause: {fileID: 0}
+  manager: 0
