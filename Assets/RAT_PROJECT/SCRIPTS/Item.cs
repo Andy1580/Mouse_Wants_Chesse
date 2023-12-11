@@ -10,13 +10,13 @@ public class Item : MonoBehaviour
     [SerializeField] private bool usabe;
     public bool Usable => usabe;
 
-    public void Usar(Jugador jugador)
-    {
-        IAccionItem accionItem = GetComponent<IAccionItem>();
-        accionItem.UsarItem(jugador);
+    //public void Usar(Jugador jugador)
+    //{
+    //    IAccionItem accionItem = GetComponent<IAccionItem>();
+    //    accionItem.UsarItem(jugador);
 
 
-    }
+    //}
 
     void OnCollisionEnter(Collision collision)
     {

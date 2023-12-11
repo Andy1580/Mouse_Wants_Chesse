@@ -40,7 +40,7 @@ public class GatoVision : MonoBehaviour
     public Transform home;
 
     public Animator gatoanimator;
-    public bool RatDead;
+    
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -103,7 +103,7 @@ public class GatoVision : MonoBehaviour
             Debug.DrawRay(Cat.transform.position, dir, Color.green); // to aid visualization
 
 
-            if (Physics.Raycast(transform.position, dir, out hit, sightRange, playerLayer) && RatDead == false && Physics.Raycast(transform.position, dir, out hit, sightRange, capBola) == false)
+            if (Physics.Raycast(transform.position, dir, out hit, sightRange, playerLayer) && Physics.Raycast(transform.position, dir, out hit, sightRange, capBola) == false)
             {
                 temp = transform.InverseTransformPoint(hit.point);
                 //temp = hit.point;
@@ -204,7 +204,7 @@ public class GatoVision : MonoBehaviour
         {
             if (isAlive == true)
             {
-                RatDead = true;
+                
                 //Destroy(playerPrefab);
                 //playerPrefab.SetActive(false);
                 gatoanimator.SetBool("IsRunning", false);

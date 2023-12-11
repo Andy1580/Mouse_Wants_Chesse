@@ -72,7 +72,7 @@ private void Update()
 
     public void UsarItem()
     {
-        SlotSeleccionado.ItemSo.itemGo.Usar(Jugador.Self);
+        //SlotSeleccionado.ItemSo.itemGo.Usar(Jugador.Self);
         SlotSeleccionado.ItemSo = null;
         SlotSeleccionado = null;
     }
@@ -81,13 +81,13 @@ private void Update()
     {
         //if (Input.GetKeyDown(KeyCode.X))
         //{
-        Transform trans = Jugador.Self.transform;
-        Vector3 posicion = trans.position + (trans.forward * 2);
-        Vector3 force = trans.up * 2;
-        Instantiate(SlotSeleccionado.ItemSo.itemGo, posicion, Quaternion.identity);
+        //Transform trans = Jugador.Self.transform;
+        //Vector3 posicion = trans.position + (trans.forward * 2);
+        //Vector3 force = trans.up * 2;
+        //Instantiate(SlotSeleccionado.ItemSo.itemGo, posicion, Quaternion.identity);
        
-        SlotSeleccionado.ItemSo = null;
-        SlotSeleccionado = null;
+        //SlotSeleccionado.ItemSo = null;
+        //SlotSeleccionado = null;
         //}
         
     }

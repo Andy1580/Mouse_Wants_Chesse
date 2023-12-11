@@ -87,7 +87,7 @@ public class ControlRaton : MonoBehaviour
             //estambre.GetComponentInChildren<Image>().GetComponentInChildren<Image>().enabled=true;
 
         }
-        if (other.gameObject.layer == 7)
+        if (other.gameObject.layer == 9)
         {
             if (InventarioRaton.HayEspacios)
             {
@@ -102,6 +102,18 @@ public class ControlRaton : MonoBehaviour
                 //Destroy(other.gameObject);
             }
 
+
+        }
+        if (other.gameObject.layer == 8)
+        {
+            if (InventarioRaton.HayEspacios)
+            {
+                Item item = other.GetComponent<Item>();
+                InventarioRaton.Agregarltem(item.ItemSo);
+                other.gameObject.SetActive(false);
+                //Destroy(other.gameObject);
+            }
+
         }
     }
 
@@ -111,6 +123,7 @@ public class ControlRaton : MonoBehaviour
         {
             if (item == enabled)
             {
+                item.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 item.GetComponent<Levitation>().enabled = false;
                 item.transform.rotation = lanzar.rotation;
                 item.transform.position = lanzar.position + (lanzar.forward * 2); ;
@@ -472,7 +485,7 @@ public class ControlRaton : MonoBehaviour
     public TMP_Text contador;
     public int _quesos;
 
-    [SerializeField] private GatoVision ratdead;
+    [SerializeField] private Gato ratdead;
     private void  Dead()
     {
         if(ratdead.RatDead==true)

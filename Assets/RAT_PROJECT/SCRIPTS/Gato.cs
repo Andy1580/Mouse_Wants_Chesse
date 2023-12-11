@@ -9,7 +9,7 @@ using Unity.VisualScripting;
 public class Gato : MonoBehaviour
 {
     public Transform Player;  //Asignar el personaje al que seguirán
-    public GatoVision muerte;
+    //public GatoVision muerte;
     public float MaxDist; //Establecer distancia en la que puede escuchar al personaje
     public LayerMask capPlayer; // Layer que verificara
     public bool alerta; // si/no de que escucho al personaje
@@ -21,11 +21,15 @@ public class Gato : MonoBehaviour
     public Animator gatoanimator;
     public Transform home;
     public GameObject estambre;
+    public bool existe;
+
+    public bool RatDead;
 
     //public Transform detenerse;
 
     public void Start()
     {
+        existe = true;
         bola = false;
         isAlive = true;
         col = GetComponent<Collider>();
@@ -117,6 +121,7 @@ public class Gato : MonoBehaviour
         {
             if (isAlive == true)
             {
+                RatDead = true;
                 //Destroy(playerPrefab);
                 playerPrefab.SetActive(false);
                 Time.timeScale = 0f;
@@ -128,8 +133,10 @@ public class Gato : MonoBehaviour
             Debug.Log("bolita");
             //Destroy(playerPrefab);
             estambre.SetActive(false);
+            existe = false;
             //Time.timeScale = 0f;
             gatoanimator.SetBool("IsRunning", false);
+            bola = false;
 
         }
     }

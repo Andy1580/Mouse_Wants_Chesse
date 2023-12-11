@@ -6,7 +6,7 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public ControlRaton jugador;
-    public GatoVision muerto;
+    public Gato muerto;
     public RumbaFunctions acabado;
     public RumbaFunctions acabado1;
     public RumbaFunctions acabado2;

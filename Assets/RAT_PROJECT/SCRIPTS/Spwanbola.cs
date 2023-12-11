@@ -5,43 +5,38 @@ using UnityEngine;
 
 public class Spwanbola : MonoBehaviour
 {
-    
-    private float minX, minZ, maxX, maxZ,minY,maxY;
+   
 
-    [SerializeField] private Transform[] puntos;
+    [SerializeField] public Transform[] puntos;
     [SerializeField] private GameObject bola;
     [SerializeField] private float tiempo;
     [SerializeField] private float tiemporegreso;
+    public Gato existex;
     private void Start()
     {
-
-        maxX = puntos.Max(punto => punto.position.x);
-        minX = puntos.Min(punto => punto.position.x);
-        maxZ = puntos.Max(punto => punto.position.z);
-        minZ = puntos.Min(punto => punto.position.z);
-        maxY = puntos.Max(punto => punto.position.y);
-        minY = puntos.Min(punto => punto.position.y);
 
     }
     private void Update()
     {
-
-        tiempo += Time.deltaTime;
-        if(tiempo > tiemporegreso)
+        if (existex.existe == false)
         {
-            tiempo = 0;
-            RegrsarItem();
+            tiempo += (Time.deltaTime)/2;
+            if (tiempo > tiemporegreso)
+            {
+                tiempo = 0;
+                RegrsarItem();
+            }
         }
-
-
-           
     }
 
     private void RegrsarItem()
     {
-
-            Vector3 posicionaleatoria = new Vector3(Random.Range(minZ, maxZ), Random.Range(minX, maxX), Random.Range(minY, maxY));
-            Instantiate(bola,posicionaleatoria, Quaternion.identity);
+            int posiciones = Random.Range(0, puntos.Length);
+            Vector3 reaparicion = puntos[posiciones].position;
+            bola.transform.position = reaparicion;
+        bola.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezeAll;
+        bola.gameObject.SetActive(true);
+        existex.existe = true;
 
     }
 }
