@@ -18,11 +18,15 @@ public class Win : MonoBehaviour
     private void Start()
     {
         win = false;
+        GetComponent<Light>().enabled = false;
     }
     // Update is called once per frame
     void Update()
     {
-        
+        if(Quesoswin._quesos == 3 )
+        {
+            GetComponent<Light>().enabled = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)

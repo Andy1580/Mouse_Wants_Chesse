@@ -14,7 +14,10 @@ public class Spwanbola : MonoBehaviour
     public Gato existex;
     private void Start()
     {
-
+        int posiciones = Random.Range(0, puntos.Length);
+        Vector3 reaparicion = puntos[posiciones].position;
+        bola.transform.position = reaparicion;
+        bola.gameObject.SetActive(true);
     }
     private void Update()
     {

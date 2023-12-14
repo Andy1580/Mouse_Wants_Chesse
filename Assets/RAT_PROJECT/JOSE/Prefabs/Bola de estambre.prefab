@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 494739788923986663}
   - component: {fileID: 5235267416031908262}
   - component: {fileID: 5128970070299645634}
+  - component: {fileID: 6946799520763506247}
   m_Layer: 8
   m_Name: Bola de estambre
   m_TagString: Bola
@@ -151,9 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5fe2a42879efef459534ae95339a34a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amplitude: 0.05
+  amplitude: 0.3
   frequency: 1
-  speed: 200
+  speed: 300
 --- !u!54 &5235267416031908262
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -202,6 +203,25 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6946799520763506247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3374153887674642846}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &5492472304665893173
 GameObject:
   m_ObjectHideFlags: 0

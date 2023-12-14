@@ -33,7 +33,8 @@ public class Gato : MonoBehaviour
         bola = false;
         isAlive = true;
         col = GetComponent<Collider>();
-        GetComponent<Transform>().position = home.position;
+        agent.transform.position = home.transform.position;
+
     }
 
     public void Update()
@@ -46,7 +47,11 @@ public class Gato : MonoBehaviour
         Quaternion rotacionDeseada = Quaternion.LookRotation(direccionMovimiento);
 
         // Aplica la rotación al objeto
-        agent.transform.rotation = rotacionDeseada;
+        if(agent.transform.position != home.transform.position)
+        {
+            agent.transform.rotation = rotacionDeseada;
+        }
+        
 
         if (agent.isOnOffMeshLink)
         {
@@ -103,6 +108,7 @@ public class Gato : MonoBehaviour
             agent.SetDestination(home.transform.position);
             if (agent.transform.position == home.transform.position)
             {
+                agent.transform.rotation = home.transform.rotation;
                 gatoanimator.SetBool("IsRunning", false);
             }
         }
