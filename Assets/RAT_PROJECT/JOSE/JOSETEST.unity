@@ -43140,7 +43140,7 @@ PrefabInstance:
     - target: {fileID: 5362058869787758165, guid: 806d3357971996943b6a695ac43ee83e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 4085cddeb1bc9184daab99eef7784889, type: 2}
+      objectReference: {fileID: 2100000, guid: 02993b13f322dad48b097d9a40bbccff, type: 2}
     - target: {fileID: 6702824507442406020, guid: 806d3357971996943b6a695ac43ee83e, type: 3}
       propertyPath: m_Name
       value: Silla_Cocina_Grande (6)
@@ -44149,7 +44149,7 @@ PrefabInstance:
     - target: {fileID: 5362058869787758165, guid: 806d3357971996943b6a695ac43ee83e, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 4085cddeb1bc9184daab99eef7784889, type: 2}
+      objectReference: {fileID: 2100000, guid: 02993b13f322dad48b097d9a40bbccff, type: 2}
     - target: {fileID: 6702824507442406020, guid: 806d3357971996943b6a695ac43ee83e, type: 3}
       propertyPath: m_Name
       value: Silla_Cocina_Grande (2)
@@ -50158,7 +50158,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 1695841675134466970, guid: 3c3ac6c16314c2a4c9ff50e7b8737d6a, type: 3}
+  - {fileID: 2100000, guid: 1705747ade9fdf345ba2014450abcfb7, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
