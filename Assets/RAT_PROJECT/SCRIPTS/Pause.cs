@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Pause : MonoBehaviour
 {
@@ -26,18 +25,19 @@ public class Pause : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape) && !pauseCanvas)
         {
-            if(Ratondead.IsDead == false)
-            {
-                pauseCanvas = true;
-                Time.timeScale = 0f;
-                canvasPause.SetActive(true);
-                canvasControles.SetActive(false);
-                PanelEstamina.SetActive(false);
-                PanelCorrer.SetActive(false);
-                Panelsigilo.SetActive(false);
-                PanelItem.SetActive(false);
-                PanelObjetivos.SetActive(false);
-            }
+            pauseCanvas = true;
+            Time.timeScale = 0f;
+            canvasPause.SetActive(true);
+
+            //if (Ratondead.IsDead == false)
+            //{
+            //    canvasControles.SetActive(false);
+            //    PanelEstamina.SetActive(false);
+            //    PanelCorrer.SetActive(false);
+            //    Panelsigilo.SetActive(false);
+            //    PanelItem.SetActive(false);
+            //    PanelObjetivos.SetActive(false);
+            //}
 
         }
         else if (Input.GetKeyDown(KeyCode.Escape) && pauseCanvas)
@@ -46,11 +46,11 @@ public class Pause : MonoBehaviour
             Time.timeScale = 1f;
             canvasPause.SetActive(false);
             canvasControles.SetActive(false);
-            PanelEstamina.SetActive(true);
-            PanelCorrer.SetActive(true);
-            Panelsigilo.SetActive(true);
-            PanelItem.SetActive(true);
-            PanelObjetivos.SetActive(true);
+            //PanelEstamina.SetActive(true);
+            //PanelCorrer.SetActive(true);
+            //Panelsigilo.SetActive(true);
+            //PanelItem.SetActive(true);
+            //PanelObjetivos.SetActive(true);
         }
     }
 
@@ -59,10 +59,10 @@ public class Pause : MonoBehaviour
         pauseCanvas = false;
         Time.timeScale = 1f;
         canvasPause.SetActive(false);
-        PanelEstamina.SetActive(true);
-        PanelCorrer.SetActive(true);
-        Panelsigilo.SetActive(true);
-        PanelItem.SetActive(true);
-        PanelObjetivos.SetActive(true);
+        //PanelEstamina.SetActive(true);
+        //PanelCorrer.SetActive(true);
+        //Panelsigilo.SetActive(true);
+        //PanelItem.SetActive(true);
+        //PanelObjetivos.SetActive(true);
     }
 }

@@ -483,7 +483,15 @@ public class ControlRaton : MonoBehaviour
             estamina += estaminareg * Time.deltaTime;
         StaminaBar.fillAmount = estamina / MaxStamina;
         //transform.position = refugio.position;
-
+        
+        //parte integrada por ANDY
+        if (estamina <= 0)
+        {
+            moveSpeed = walkSpeed;
+            state = MovementState.walking;
+        }
+        else { return; }
+        //termina parte integrada por ANDY
     }
     public TMP_Text contador;
     public int _quesos;
