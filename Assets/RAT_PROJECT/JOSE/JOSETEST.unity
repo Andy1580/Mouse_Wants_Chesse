@@ -40158,7 +40158,7 @@ GameObject:
   - component: {fileID: 1156594703}
   - component: {fileID: 1156594702}
   - component: {fileID: 1156594701}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BreakFastChair_2 (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73443,7 +73443,7 @@ GameObject:
   - component: {fileID: 2133573254}
   - component: {fileID: 2133573253}
   - component: {fileID: 2133573252}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BreakFastChair_2 (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74942,23 +74942,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8165178592597353477, guid: fc75aba2f64b0c84ab0f5d74ee974a5f, type: 3}
       propertyPath: m_Range
-      value: 1.6
+      value: 4.7
       objectReference: {fileID: 0}
     - target: {fileID: 8165178592597353477, guid: fc75aba2f64b0c84ab0f5d74ee974a5f, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 0.07206082
       objectReference: {fileID: 0}
     - target: {fileID: 8165178592597353477, guid: fc75aba2f64b0c84ab0f5d74ee974a5f, type: 3}
       propertyPath: m_Color.g
-      value: 0.18360198
-      objectReference: {fileID: 0}
-    - target: {fileID: 8165178592597353477, guid: fc75aba2f64b0c84ab0f5d74ee974a5f, type: 3}
-      propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8165178592597353477, guid: fc75aba2f64b0c84ab0f5d74ee974a5f, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8165178592597353477, guid: fc75aba2f64b0c84ab0f5d74ee974a5f, type: 3}
       propertyPath: m_Intensity
-      value: 20.37
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8165178592597353477, guid: fc75aba2f64b0c84ab0f5d74ee974a5f, type: 3}
+      propertyPath: m_Lightmapping
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8623221631488913866, guid: fc75aba2f64b0c84ab0f5d74ee974a5f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -74966,7 +74970,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8623221631488913866, guid: fc75aba2f64b0c84ab0f5d74ee974a5f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 648.68854
+      value: 649.2
       objectReference: {fileID: 0}
     - target: {fileID: 8623221631488913866, guid: fc75aba2f64b0c84ab0f5d74ee974a5f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -75363,7 +75367,7 @@ GameObject:
   - component: {fileID: 546830974549108983}
   - component: {fileID: 151264352834490093}
   - component: {fileID: 480253276}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BreakFastChair_2 (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76339,7 +76343,7 @@ GameObject:
   - component: {fileID: 6772778795264396691}
   - component: {fileID: 4100790092811934731}
   - component: {fileID: 480253278}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: BreakFastChair_2 (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76491,7 +76495,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 1344
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -76518,7 +76522,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 1344
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -76545,7 +76549,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 1344
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -76648,7 +76652,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 1344
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
