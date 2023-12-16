@@ -10,10 +10,12 @@ public class GameManager : MonoBehaviour
     public RumbaFunctions acabado;
     public RumbaFunctions acabado1;
     public RumbaFunctions acabado2;
+    public RumbaFunctions acabado3;
     public TMP_Text alertatx;
     public Animator popupAnimator;
     private Queue<string> popupQueue; //make it different type for more detailed popups, you can add different types, titles, descriptions etc
     private Coroutine queueChecker;
+    public GameObject audioSource;
 
 
     [SerializeField] public GameObject queso0;
@@ -52,9 +54,20 @@ public class GameManager : MonoBehaviour
         lose.SetActive(false);
         pause.SetActive(false);
         //movcam.GetComponent<MoveCamera>().enabled = false;
+        audioSource.SetActive(false);
     }
     private void Update()
     {
+        if(jugador.item == enabled)
+        {
+            Item();
+        }
+        else
+        {
+            PanelItem.SetActive(false);
+        }
+        
+
         if(muerto.RatDead == true)
         {
             PanelEstamina.SetActive(false);
@@ -64,9 +77,11 @@ public class GameManager : MonoBehaviour
             PanelObjetivos.SetActive(false);
             lose.SetActive(true);
             manager = false;
+            
             if (muerto.RatDead == true)
             {
                 pause.SetActive(false);
+                audioSource.SetActive(false);
             }
         }
 
@@ -80,6 +95,7 @@ public class GameManager : MonoBehaviour
             lose.SetActive(true);
             manager = false;
             pause.SetActive(false);
+            audioSource.SetActive(false);
         }
         if (acabado1.IsDead == true)
         {
@@ -91,6 +107,7 @@ public class GameManager : MonoBehaviour
             lose.SetActive(true);
             manager = false;
             pause.SetActive(false);
+            audioSource.SetActive(false);
         }
         if (acabado2.IsDead == true)
         {
@@ -102,8 +119,20 @@ public class GameManager : MonoBehaviour
             lose.SetActive(true);
             manager = false;
             pause.SetActive(false);
+            audioSource.SetActive(false);
         }
-
+        if (acabado3.IsDead == true)
+        {
+            PanelEstamina.SetActive(false);
+            PanelCorrer.SetActive(false);
+            Panelsigilo.SetActive(false);
+            PanelItem.SetActive(false);
+            PanelObjetivos.SetActive(false);
+            lose.SetActive(true);
+            manager = false;
+            pause.SetActive(false);
+            audioSource.SetActive(false);
+        }
     }
     //private void Alertas ()
     //{
@@ -165,12 +194,17 @@ public class GameManager : MonoBehaviour
         instrucciones.SetActive(false);
         Time.timeScale = 1f;
         PanelEstamina.SetActive(true);
-        PanelCorrer.SetActive(true);
-        Panelsigilo.SetActive(true);
+        PanelCorrer.SetActive(false);
+        Panelsigilo.SetActive(false);
         PanelItem.SetActive(true);
         PanelObjetivos.SetActive(true);
         pause.SetActive(true);
         manager = true;
+        audioSource.SetActive(true);
     }
 
+    public void Item()
+    {
+        PanelItem.SetActive(true);
+    }
 }

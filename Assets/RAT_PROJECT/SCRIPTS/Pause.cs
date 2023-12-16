@@ -45,7 +45,7 @@ public class Pause : MonoBehaviour
             pauseCanvas = false;
             Time.timeScale = 1f;
             canvasPause.SetActive(false);
-            canvasControles.SetActive(false);
+            //canvasControles.SetActive(false);
             //PanelEstamina.SetActive(true);
             //PanelCorrer.SetActive(true);
             //Panelsigilo.SetActive(true);

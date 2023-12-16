@@ -80,8 +80,9 @@ public class Gato : MonoBehaviour
         {
             //transform.LookAt(home.transform.position);
             agent.SetDestination(home.transform.position);
-            if (agent.transform.position == home.transform.position)
+            if (transform.position == home.transform.position)
             {
+                
                 gatoanimator.SetBool("IsRunning", false);
             }
         }
