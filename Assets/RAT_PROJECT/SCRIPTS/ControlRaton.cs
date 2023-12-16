@@ -126,12 +126,12 @@ public class ControlRaton : MonoBehaviour
             {
                 item.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
                 item.GetComponent<Levitation>().enabled = false;
-                item.transform.rotation = lanzar.rotation;
+                //item.transform.rotation = lanzar.rotation;
                 item.transform.position = lanzar.position + (lanzar.forward * 2); ;
                 item.SetActive(true);
                 item.GetComponent<Rigidbody>().isKinematic = false;
-                item.GetComponent<Rigidbody>().AddForce(lanzar.forward * fuerza, ForceMode.Impulse);
-                item.GetComponent<Rigidbody>().AddForce(lanzar.up * 10, ForceMode.Impulse);
+                //item.GetComponent<Rigidbody>().AddForce(lanzar.forward * fuerza, ForceMode.Impulse);
+                //item.GetComponent<Rigidbody>().AddForce(lanzar.up * 10, ForceMode.Impulse);
                 item.GetComponent<Rigidbody>().useGravity = true;
                 //item.gameObject.tag = "Bola";
                 item = null;

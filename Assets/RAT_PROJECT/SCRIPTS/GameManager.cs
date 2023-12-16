@@ -37,24 +37,24 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        manager = false;
-        core.SetActive(true);
-        instrucciones.SetActive(false);
-        Time.timeScale = 0f;
+        manager = true;
+        //core.SetActive(true);
+        //instrucciones.SetActive(false);
+        Time.timeScale = 1f;
         alertaObj.gameObject.SetActive(false);
         popupAnimator = alertaObj.GetComponent<Animator>();
         alertaObj.SetActive(false);
         popupQueue = new Queue<string>();
 
-        PanelEstamina.SetActive(false);
+        PanelEstamina.SetActive(true);
         PanelCorrer.SetActive(false);
         Panelsigilo.SetActive(false);
         PanelItem.SetActive(false);
-        PanelObjetivos.SetActive(false);
+        PanelObjetivos.SetActive(true);
         lose.SetActive(false);
         pause.SetActive(false);
         //movcam.GetComponent<MoveCamera>().enabled = false;
-        audioSource.SetActive(false);
+        audioSource.SetActive(true);
     }
     private void Update()
     {
@@ -133,6 +133,7 @@ public class GameManager : MonoBehaviour
             pause.SetActive(false);
             audioSource.SetActive(false);
         }
+
     }
     //private void Alertas ()
     //{
@@ -185,13 +186,13 @@ public class GameManager : MonoBehaviour
      
     public void Controles()
     {
-        core.SetActive(false);
-        instrucciones.SetActive(true);
+        //core.SetActive(false);
+        //instrucciones.SetActive(true);
     }
 
     public void Iniciar()
     {
-        instrucciones.SetActive(false);
+        //instrucciones.SetActive(false);
         Time.timeScale = 1f;
         PanelEstamina.SetActive(true);
         PanelCorrer.SetActive(false);
