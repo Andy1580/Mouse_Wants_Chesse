@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
         PanelItem.SetActive(false);
         PanelObjetivos.SetActive(true);
         lose.SetActive(false);
-        pause.SetActive(false);
+        //pause.SetActive(false);
         //movcam.GetComponent<MoveCamera>().enabled = false;
         audioSource.SetActive(true);
     }
@@ -199,7 +199,7 @@ public class GameManager : MonoBehaviour
         Panelsigilo.SetActive(false);
         PanelItem.SetActive(true);
         PanelObjetivos.SetActive(true);
-        pause.SetActive(true);
+        //pause.SetActive(true);
         manager = true;
         audioSource.SetActive(true);
     }
