@@ -33,7 +33,7 @@ public class Gato : MonoBehaviour
         bola = false;
         isAlive = true;
         col = GetComponent<Collider>();
-        agent.transform.position = home.transform.position;
+        //agent.transform.position = home.transform.position;
 
     }
 

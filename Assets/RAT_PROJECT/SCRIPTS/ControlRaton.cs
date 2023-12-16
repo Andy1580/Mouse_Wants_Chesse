@@ -74,6 +74,7 @@ public class ControlRaton : MonoBehaviour
     public Image bola;
     public Transform lanzar;
     public Pause pausa1;
+    
 
     [SerializeField] public Transform start;
 
@@ -204,6 +205,8 @@ public class ControlRaton : MonoBehaviour
         else
             rb.drag = 0;
 
+        
+
         //if (estamina > 0 && !stealth)
         //    state = MovementState.sprinting;
         //else
@@ -218,7 +221,7 @@ public class ControlRaton : MonoBehaviour
         //    IndicadorSig.gameObject.SetActive(false);
         //    stealth = false;
         //}
-        if(running == true && estamina > 0)
+        if(running == true && estamina > 0 && climbing == false)
         {
             animator.SetBool("IsRunning", true);
             IndicadorRun.gameObject.SetActive(true);
@@ -270,7 +273,7 @@ public class ControlRaton : MonoBehaviour
             animator.SetBool("IsWalking", true);
         }
 
-        if (Input.GetAxisRaw("Vertical") != 0 && running == false && stealth == false && climbing == false)
+       else if (Input.GetAxisRaw("Vertical") != 0 && running == false && stealth == false && climbing == false)
         {
             moviendose = true;
             animator.SetBool("IsWalking", true);
@@ -345,6 +348,7 @@ public class ControlRaton : MonoBehaviour
         {
             state = MovementState.climbing;
             desiredMoveSpeed = climbSpeed;
+            
         }
         // Mode - Stealing
         //RECORDAR REACTIVAR MAS TARDE
@@ -365,7 +369,7 @@ public class ControlRaton : MonoBehaviour
         //}
 
         // Mode - Sprinting
-        else if (Input.GetKey(sprintKey))
+        else if (Input.GetKey(sprintKey) )
         {
             if (estamina > 0)
             {
@@ -378,7 +382,11 @@ public class ControlRaton : MonoBehaviour
                 StaminaBar.fillAmount = estamina / MaxStamina;
                 
             }
-
+            else
+            {
+                running = false;
+                animator.SetBool("IsWalking", true);
+            }
         }
 
         // Mode - Walking
